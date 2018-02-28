@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "113973833834",
+    "firebase_url": "https://sptasdb.firebaseio.com",
+    "project_id": "sptasdb",
+    "storage_bucket": "sptasdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113973833834:android:b401aa720be296a3",
+        "android_client_info": {
+          "package_name": "com.sptas.sptasv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113973833834-rirp4tmhjhl913et6rbatkl64d09qq0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sptas.sptasv2",
+            "certificate_hash": "1e4c817409957275a83d597f6122ef90d4cae30b"
+          }
+        },
+        {
+          "client_id": "113973833834-4jj6seb6be3bke7080fgoju1v03nfkl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYdcEpbb0wb4q5Sr6Fo2qS8npSjo_y8pI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113973833834-4jj6seb6be3bke7080fgoju1v03nfkl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
