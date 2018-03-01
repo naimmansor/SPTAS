@@ -4,6 +4,13 @@
     >
 
     <item
+        android:id="@+id/action_studentProfile"
+        android:enabled="true"
+        android:title="Profile"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/action_category"
         android:enabled="true"
         android:title="Categories"

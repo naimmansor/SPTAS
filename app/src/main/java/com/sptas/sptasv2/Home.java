@@ -57,6 +57,9 @@ public class Home extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId())
                 {
+                    case R.id.action_studentProfile:
+                        selectedFragment = StudentFragment.newInstance();
+                        break;
                     case R.id.action_category:
                         selectedFragment = CategoryFragment.newInstance();
                         break;
@@ -116,7 +119,7 @@ public class Home extends AppCompatActivity {
 
     private void setDefaultFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout,CategoryFragment.newInstance());
+        transaction.replace(R.id.frame_layout,StudentFragment.newInstance());
         transaction.commit();
     }
 }
