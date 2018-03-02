@@ -12,12 +12,13 @@ import com.sptas.sptasv2.R;
 
 public class StudentViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView txt_name, txt_email, txt_phone, txt_class, txt_sv;
+    public TextView txt_name, txt_email, txt_phone, txt_class, txt_sv, txt_score;
 
 
     public StudentViewHolder(View itemView) {
         super(itemView);
 
+        txt_score = (TextView) itemView.findViewById(R.id.txt_score);
         txt_name = (TextView) itemView.findViewById(R.id.txt_name);
         txt_email = (TextView) itemView.findViewById(R.id.txt_email);
         txt_phone = (TextView) itemView.findViewById(R.id.txt_phone);
