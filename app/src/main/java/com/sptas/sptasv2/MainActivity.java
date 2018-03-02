@@ -25,7 +25,7 @@ import com.sptas.sptasv2.Model.User;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    MaterialEditText edtNewUser, edtNewPassword, edtNewEmail; //for Sign Up
+    MaterialEditText edtNewUser, edtNewPassword, edtNewEmail, edtNewNoPhone, edtNewYear, edtNewSV; //for Sign Up
     MaterialEditText edtUser, edtPassword; //for Sign In
 
     Button btnSignUp, btnSignIn;
@@ -124,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
         edtNewUser = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewUserName);
         edtNewPassword = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewPassword);
         edtNewEmail = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewEmail);
+        edtNewNoPhone = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewNoPhone);
+        edtNewYear = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewYear);
+        edtNewSV = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewSV);
 
         alertDialog.setView(sign_up_layout);
         alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);
@@ -140,7 +143,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 final User user = new User(edtNewUser.getText().toString(),
                         edtNewPassword.getText().toString(),
-                        edtNewEmail.getText().toString());
+                        edtNewEmail.getText().toString(),
+                        edtNewNoPhone.getText().toString(),
+                        edtNewYear.getText().toString(),
+                        edtNewSV.getText().toString());
 
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

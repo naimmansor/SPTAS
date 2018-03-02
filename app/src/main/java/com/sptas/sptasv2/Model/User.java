@@ -8,14 +8,21 @@ public class User {
     private String userName;
     private String password;
     private String email;
+    private String noPhone;
+    private String year;
+    private String sv;
+
 
     public User() {
     }
 
-    public User(String userName, String password, String email) {
+    public User(String userName, String password, String email, String noPhone, String year, String sv) {
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.noPhone = noPhone;
+        this.year = year;
+        this.sv = sv;
     }
 
     public String getUserName() {
@@ -40,5 +47,29 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNoPhone() {
+        return noPhone;
+    }
+
+    public void setNoPhone(String noPhone) {
+        this.noPhone = noPhone;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getSv() {
+        return sv;
+    }
+
+    public void setSv(String sv) {
+        this.sv = sv;
     }
 }
