@@ -11,9 +11,8 @@ import java.util.List;
  */
 
 public class Common {
+    public static final String STR_PUSH = "pushNotification";
     public static String categoryId, categoryName;
     public static User currentUser;
     public static List<Question> questionList = new ArrayList<>();
-
-    public static final String STR_PUSH = "pushNotification";
 }

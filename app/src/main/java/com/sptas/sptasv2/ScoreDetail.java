@@ -1,7 +1,7 @@
 package com.sptas.sptasv2;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -21,6 +21,7 @@ public class ScoreDetail extends AppCompatActivity {
     DatabaseReference question_score;
 
     String viewUser = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class ScoreDetail extends AppCompatActivity {
         question_score = database.getReference("Question_Score");
 
         // View
-        scoreList = (RecyclerView)findViewById(R.id.scoreList);
+        scoreList = (RecyclerView) findViewById(R.id.scoreList);
         scoreList.setHasFixedSize(false);  // a bit change from tutorial => true
         layoutManager = new LinearLayoutManager(this);
         scoreList.setLayoutManager(layoutManager);

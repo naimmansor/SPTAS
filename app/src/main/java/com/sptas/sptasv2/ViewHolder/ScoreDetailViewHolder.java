@@ -17,8 +17,8 @@ public class ScoreDetailViewHolder extends RecyclerView.ViewHolder {
     public ScoreDetailViewHolder(View itemView) {
         super(itemView);
 
-        txt_name = (TextView)itemView.findViewById(R.id.txt_name);
-        txt_score = (TextView)itemView.findViewById(R.id.txt_score);
+        txt_name = (TextView) itemView.findViewById(R.id.txt_name);
+        txt_score = (TextView) itemView.findViewById(R.id.txt_score);
 
     }
 }

@@ -9,6 +9,6 @@
     </style>
 
     <style name="MyButton" parent="Theme.AppCompat.Light">
-            <item name="colorControlHighlight">#1CB3BC</item>
+        <item name="colorControlHighlight">#1CB3BC</item>
     </style>
 </resources>

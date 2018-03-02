@@ -19,14 +19,14 @@ public class StudentFragment extends Fragment {
 
     View myFragment;
 
-        RecyclerView listStudent;
-        RecyclerView.LayoutManager layoutManager;
-        FirebaseRecyclerAdapter<User, StudentViewHolder> adapter;
+    RecyclerView listStudent;
+    RecyclerView.LayoutManager layoutManager;
+    FirebaseRecyclerAdapter<User, StudentViewHolder> adapter;
 
-        FirebaseDatabase database;
-        DatabaseReference student_profile;
+    FirebaseDatabase database;
+    DatabaseReference student_profile;
 
-    public static StudentFragment newInstance(){
+    public static StudentFragment newInstance() {
         StudentFragment studentFragment = new StudentFragment();
         return studentFragment;
     }
@@ -41,7 +41,7 @@ public class StudentFragment extends Fragment {
         student_profile = database.getReference("Users");
 
         //View
-        listStudent = (RecyclerView)myFragment.findViewById(R.id.listStudent);
+        listStudent = (RecyclerView) myFragment.findViewById(R.id.listStudent);
         listStudent.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(container.getContext());
         listStudent.setLayoutManager(layoutManager);

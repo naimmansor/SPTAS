@@ -1,12 +1,11 @@
 package com.sptas.sptasv2;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Interface.ItemClickListener;
 import com.sptas.sptasv2.Interface.RankingCallBack;
-import com.sptas.sptasv2.Model.Question;
 import com.sptas.sptasv2.Model.QuestionScore;
 import com.sptas.sptasv2.Model.Ranking;
 import com.sptas.sptasv2.ViewHolder.RankingViewHolder;
@@ -32,14 +30,14 @@ public class RankingFragment extends Fragment {
 
     RecyclerView rankingList;
     LinearLayoutManager layoutManager;
-    FirebaseRecyclerAdapter<Ranking,RankingViewHolder> adapter;
+    FirebaseRecyclerAdapter<Ranking, RankingViewHolder> adapter;
 
     FirebaseDatabase database;
     DatabaseReference questionScore, rankingTbl;
 
     int sum = 0;
 
-    public static RankingFragment newInstance(){
+    public static RankingFragment newInstance() {
         RankingFragment rankingFragment = new RankingFragment();
         return rankingFragment;
     }
@@ -61,7 +59,7 @@ public class RankingFragment extends Fragment {
         myFragment = inflater.inflate(R.layout.fragment_ranking, container, false);
 
         // Init View
-        rankingList = (RecyclerView)myFragment.findViewById(R.id.rankingList);
+        rankingList = (RecyclerView) myFragment.findViewById(R.id.rankingList);
         layoutManager = new LinearLayoutManager(getActivity());
         rankingList.setHasFixedSize(false); // a bit change from tutorial => true
         // Because OrderByChild method of Firebase will sort list with ascending
@@ -78,7 +76,7 @@ public class RankingFragment extends Fragment {
                 // Update to Ranking table
                 rankingTbl.child(ranking.getUserName())
                         .setValue(ranking);
-               // showRanking(); // After upload, we will sort Ranking table and show result
+                // showRanking(); // After upload, we will sort Ranking table and show result
             }
         });
 
@@ -100,7 +98,7 @@ public class RankingFragment extends Fragment {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         Intent scoreDetail = new Intent(getActivity(), ScoreDetail.class);
-                        scoreDetail.putExtra("viewUser",model.getUserName());
+                        scoreDetail.putExtra("viewUser", model.getUserName());
                         startActivity(scoreDetail);
                     }
                 });
@@ -114,14 +112,12 @@ public class RankingFragment extends Fragment {
     }
 
 
-
     private void updateScore(final String userName, final RankingCallBack<Ranking> callback) {
         questionScore.orderByChild("user").equalTo(userName)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot data : dataSnapshot.getChildren())
-                        {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
                             QuestionScore ques = data.getValue(QuestionScore.class);
                             sum += Integer.parseInt(ques.getScore());
                         }

@@ -33,7 +33,7 @@ public class Start extends AppCompatActivity {
 
         loadQuestion(Common.categoryId);
 
-        btnPlay = (Button)findViewById(R.id.btnPlay);
+        btnPlay = (Button) findViewById(R.id.btnPlay);
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,15 +48,14 @@ public class Start extends AppCompatActivity {
     private void loadQuestion(String categoryId) {
 
         // First, clear list if have old question
-        if(Common.questionList.size() > 0)
+        if (Common.questionList.size() > 0)
             Common.questionList.clear();
 
         questions.orderByChild("CategoryId").equalTo(categoryId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren())
-                        {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Question ques = postSnapshot.getValue(Question.class);
                             Common.questionList.add(ques);
                         }

@@ -3,7 +3,6 @@ package com.sptas.sptasv2.BroadcastReceiver;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.sptas.sptasv2.Common.Common;

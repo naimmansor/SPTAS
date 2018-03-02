@@ -9,7 +9,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
  * Created by Na'im Mansor on 26-Feb-18.
  */
 
-public class MyFirebaseIdService extends FirebaseInstanceIdService{
+public class MyFirebaseIdService extends FirebaseInstanceIdService {
 
     @Override
     public void onTokenRefresh() {
@@ -19,6 +19,6 @@ public class MyFirebaseIdService extends FirebaseInstanceIdService{
     }
 
     private void sendRegistrationToServer(String refreshedToken) {
-        Log.d("TOKEN",refreshedToken);
+        Log.d("TOKEN", refreshedToken);
     }
 }

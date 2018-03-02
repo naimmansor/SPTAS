@@ -12,7 +12,7 @@ import com.sptas.sptasv2.R;
  * Created by Na'im Mansor on 16-Feb-18.
  */
 
-public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView category_name;
     public ImageView category_image;
@@ -21,7 +21,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.
 
     public CategoryViewHolder(View itemView) {
         super(itemView);
-        category_image = (ImageView)itemView.findViewById(R.id.category_image);
+        category_image = (ImageView) itemView.findViewById(R.id.category_image);
         category_name = (TextView) itemView.findViewById(R.id.category_name);
 
         itemView.setOnClickListener(this);
@@ -33,6 +33,6 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View view) {
-        itemClickListener.onClick(view,getAdapterPosition(),false);
+        itemClickListener.onClick(view, getAdapterPosition(), false);
     }
 }

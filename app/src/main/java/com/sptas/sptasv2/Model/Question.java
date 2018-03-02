@@ -5,7 +5,7 @@ package com.sptas.sptasv2.Model;
  */
 
 public class Question {
-    private String Question,AnswerA,AnswerB,AnswerC,AnswerD,CorrectAnswer,CategoryId,IsImageQuestion;
+    private String Question, AnswerA, AnswerB, AnswerC, AnswerD, CorrectAnswer, CategoryId, IsImageQuestion;
 
     public Question() {
     }

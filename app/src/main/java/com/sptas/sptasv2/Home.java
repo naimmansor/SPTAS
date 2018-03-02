@@ -7,21 +7,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenu;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Model.Category;
-
-import java.util.Random;
 
 public class Home extends AppCompatActivity {
 
@@ -49,14 +45,13 @@ public class Home extends AppCompatActivity {
 
         registrationNotification();
 
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
-                switch (item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.action_studentProfile:
                         selectedFragment = StudentFragment.newInstance();
                         break;
@@ -69,13 +64,13 @@ public class Home extends AppCompatActivity {
                 }
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,selectedFragment);
+                transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();
 
                 return true;
             }
         });
-        
+
         setDefaultFragment();
     }
 
@@ -83,8 +78,7 @@ public class Home extends AppCompatActivity {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(Common.STR_PUSH))
-                {
+                if (intent.getAction().equals(Common.STR_PUSH)) {
                     String message = intent.getStringExtra("message");
                     showNotification("EDMTDev", message);
                 }
@@ -119,7 +113,7 @@ public class Home extends AppCompatActivity {
 
     private void setDefaultFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout,StudentFragment.newInstance());
+        transaction.replace(R.id.frame_layout, StudentFragment.newInstance());
         transaction.commit();
     }
 }

@@ -25,7 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //From stackOverflow
         NotificationManager notificationManager =
-                (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("default",
                     "YOUR_CHANNEL_NAME",
