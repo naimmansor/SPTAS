@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerAlarm() {
         Calendar calender = Calendar.getInstance();
-        calender.set(Calendar.HOUR_OF_DAY, 12); // 9 Hour
+        calender.set(Calendar.HOUR_OF_DAY, 23); // 9 Hour
         calender.set(Calendar.MINUTE, 10);
         calender.set(Calendar.SECOND, 0);
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setMessage("Please fill full Information");
 
         LayoutInflater inflater = this.getLayoutInflater();
-        View sign_up_layout = inflater.inflate(R.layout.sign_up_layout, null);
+        View sign_up_layout = inflater.inflate(R.layout.student_sign_up_layout, null);
 
         edtNewUser = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewUserName);
         edtNewPassword = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewPassword);

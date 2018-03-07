@@ -62,7 +62,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener {
         {
             Button clickedButton = (Button) view;
             if (clickedButton.getText().equals(Common.questionList.get(index).getCorrectAnswer())) {
-                // Chooose correct answer
+                // Choose correct answer
                 score += 10;
                 correctAnswer++;
                 showQuestion(++index); // next question

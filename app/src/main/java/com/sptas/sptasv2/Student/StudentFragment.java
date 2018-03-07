@@ -1,4 +1,4 @@
-package com.sptas.sptasv2;
+package com.sptas.sptasv2.Student;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Model.User;
+import com.sptas.sptasv2.R;
 import com.sptas.sptasv2.ViewHolder.StudentViewHolder;
 
 public class StudentFragment extends Fragment {
@@ -60,14 +62,16 @@ public class StudentFragment extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(StudentViewHolder viewHolder, User model, int position) {
-                viewHolder.txt_name.setText(model.getUserName());
-                viewHolder.txt_email.setText(model.getEmail());
-                viewHolder.txt_phone.setText(model.getNoPhone());
-                viewHolder.txt_class.setText(model.getYear());
-                viewHolder.txt_sv.setText(model.getSv());
+                viewHolder.txt_name.setText(Common.currentUser.getUserName().toUpperCase());
+                viewHolder.txt_email.setText(Common.currentUser.getEmail());
+                viewHolder.txt_phone.setText(Common.currentUser.getNoPhone());
+                viewHolder.txt_class.setText(Common.currentUser.getYear());
+                viewHolder.txt_sv.setText(Common.currentUser.getSv());
             }
         };
         adapter.notifyDataSetChanged();
         listStudent.setAdapter(adapter);
     }
+
+
 }

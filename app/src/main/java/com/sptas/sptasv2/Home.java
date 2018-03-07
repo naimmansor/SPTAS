@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.sptas.sptasv2.Common.Common;
+import com.sptas.sptasv2.Student.StudentFragment;
 
 public class Home extends AppCompatActivity {
 
@@ -80,7 +81,7 @@ public class Home extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(Common.STR_PUSH)) {
                     String message = intent.getStringExtra("message");
-                    showNotification("EDMTDev", message);
+                    showNotification("NaimMansor", message);
                 }
             }
         };
