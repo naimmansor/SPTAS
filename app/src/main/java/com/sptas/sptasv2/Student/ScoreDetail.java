@@ -1,4 +1,4 @@
-package com.sptas.sptasv2;
+package com.sptas.sptasv2.Student;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sptas.sptasv2.Model.QuestionScore;
+import com.sptas.sptasv2.R;
 import com.sptas.sptasv2.ViewHolder.ScoreDetailViewHolder;
 
 public class ScoreDetail extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class ScoreDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score_detail);
+        setContentView(R.layout.student_activity_score_detail);
 
         // Firebase
         database = FirebaseDatabase.getInstance();
@@ -47,7 +48,7 @@ public class ScoreDetail extends AppCompatActivity {
     private void loadScoreDetail(String viewUser) {
         adapter = new FirebaseRecyclerAdapter<QuestionScore, ScoreDetailViewHolder>(
                 QuestionScore.class,
-                R.layout.score_detail_layout,
+                R.layout.student_score_detail_layout,
                 ScoreDetailViewHolder.class,
                 question_score.orderByChild("user").equalTo(viewUser)
         ) {

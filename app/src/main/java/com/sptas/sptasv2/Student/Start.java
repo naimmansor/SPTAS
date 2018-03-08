@@ -1,4 +1,4 @@
-package com.sptas.sptasv2;
+package com.sptas.sptasv2.Student;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Model.Question;
+import com.sptas.sptasv2.R;
 
 import java.util.Collections;
 
@@ -26,7 +27,7 @@ public class Start extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.student_activity_start);
 
         database = FirebaseDatabase.getInstance();
         questions = database.getReference("Questions");

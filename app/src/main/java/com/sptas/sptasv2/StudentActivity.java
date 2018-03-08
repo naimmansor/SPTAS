@@ -1,167 +1,122 @@
 package com.sptas.sptasv2;
 
-import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.MenuItem;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.rengwuxian.materialedittext.MaterialEditText;
-import com.sptas.sptasv2.BroadcastReceiver.AlarmReceiver;
 import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Model.User;
-
-import java.util.Calendar;
+import com.sptas.sptasv2.Student.CategoryFragment;
+import com.sptas.sptasv2.Student.RankingFragment;
+import com.sptas.sptasv2.Student.StudentFragment;
 
 public class StudentActivity extends AppCompatActivity {
-    MaterialEditText edtNewUser, edtNewPassword, edtNewEmail, edtNewNoPhone, edtNewYear, edtNewSV; //for Sign Up
-    MaterialEditText edtUser, edtPassword; //for Sign In
 
-    Button btnSignUp, btnSignIn;
+    BottomNavigationView bottomNavigationView;
 
-    FirebaseDatabase database;
-    DatabaseReference users;
+    BroadcastReceiver mRegistrationBroadcastReceiver;
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter("registrationComplete"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter(Common.STR_PUSH));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.student_activity_home);
 
-        registerAlarm();
+        registrationNotification();
 
-        //Firebase
-        database = FirebaseDatabase.getInstance();
-        users = database.getReference("Users");
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
-        edtUser = (MaterialEditText) findViewById(R.id.edtUser);
-        edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
-
-        btnSignIn = (Button) findViewById(R.id.btn_sign_in);
-        btnSignUp = (Button) findViewById(R.id.btn_sign_up);
-
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                showSignUpDialog();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                switch (item.getItemId()) {
+                    case R.id.action_studentProfile:
+                        selectedFragment = StudentFragment.newInstance();
+                        break;
+                    case R.id.action_category:
+                        selectedFragment = CategoryFragment.newInstance();
+                        break;
+                    case R.id.action_ranking:
+                        selectedFragment = RankingFragment.newInstance();
+                        break;
+                }
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.commit();
+
+                return true;
             }
         });
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        setDefaultFragment();
+    }
+
+    private void registrationNotification() {
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
-            public void onClick(View view) {
-                signIn(edtUser.getText().toString(), edtPassword.getText().toString());
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(Common.STR_PUSH)) {
+                    String message = intent.getStringExtra("message");
+                    showNotification("NaimMansor", message);
+                }
             }
-        });
+        };
+    }
+
+    private void showNotification(String title, String message) {
+
+        //From stackOverflow
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("default",
+                    "YOUR_CHANNEL_NAME",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DISCRIPTION");
+            mNotificationManager.createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher_round) // notification icon
+                .setContentTitle(title) // title for notification
+                .setContentText(message)// message for notification
+                .setAutoCancel(true); // clear notification after click
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(pi);
+        mNotificationManager.notify(0, mBuilder.build());
 
     }
 
-    private void registerAlarm() {
-        Calendar calender = Calendar.getInstance();
-        calender.set(Calendar.HOUR_OF_DAY, 23); // 9 Hour
-        calender.set(Calendar.MINUTE, 10);
-        calender.set(Calendar.SECOND, 0);
-
-        Intent intent = new Intent(StudentActivity.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(StudentActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calender.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-    }
-
-    private void signIn(final String user, final String pwd) {
-        users.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(user).exists()) {
-                    if (!user.isEmpty()) {
-                        User login = dataSnapshot.child(user).getValue(User.class);
-                        if (login.getPassword().equals(pwd)) {
-                            Intent homeActivity = new Intent(StudentActivity.this, Home.class);
-                            Common.currentUser = login;
-                            startActivity(homeActivity);
-                            finish();
-                        } else
-                            Toast.makeText(StudentActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(StudentActivity.this, "Please enter your user name", Toast.LENGTH_SHORT).show();
-                    }
-                } else
-                    Toast.makeText(StudentActivity.this, "User is not exists! ", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void showSignUpDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(StudentActivity.this);
-        alertDialog.setTitle("Sign Up");
-        alertDialog.setMessage("Please fill full Information");
-
-        LayoutInflater inflater = this.getLayoutInflater();
-        View sign_up_layout = inflater.inflate(R.layout.student_sign_up_layout, null);
-
-        edtNewUser = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewUserName);
-        edtNewPassword = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewPassword);
-        edtNewEmail = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewEmail);
-        edtNewNoPhone = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewNoPhone);
-        edtNewYear = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewYear);
-        edtNewSV = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewSV);
-
-        alertDialog.setView(sign_up_layout);
-        alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);
-
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                final User user = new User(edtNewUser.getText().toString(),
-                        edtNewPassword.getText().toString(),
-                        edtNewEmail.getText().toString(),
-                        edtNewNoPhone.getText().toString(),
-                        edtNewYear.getText().toString(),
-                        edtNewSV.getText().toString());
-
-                users.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.child(user.getUserName()).exists())
-                            Toast.makeText(StudentActivity.this, "User already exists! ", Toast.LENGTH_SHORT).show();
-                        else {
-                            users.child(user.getUserName())
-                                    .setValue(user);
-                            Toast.makeText(StudentActivity.this, "User registration success", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                dialogInterface.dismiss();
-            }
-        });
-
-        alertDialog.show();
+    private void setDefaultFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, StudentFragment.newInstance());
+        transaction.commit();
     }
 }

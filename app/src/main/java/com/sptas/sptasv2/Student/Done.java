@@ -1,4 +1,4 @@
-package com.sptas.sptasv2;
+package com.sptas.sptasv2.Student;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Model.QuestionScore;
+import com.sptas.sptasv2.R;
+import com.sptas.sptasv2.StudentActivity;
 
 public class Done extends AppCompatActivity {
 
@@ -25,7 +27,7 @@ public class Done extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_done);
+        setContentView(R.layout.student_activity_done);
 
         database = FirebaseDatabase.getInstance();
         question_score = database.getReference("Question_Score");
@@ -38,7 +40,7 @@ public class Done extends AppCompatActivity {
         btnTryAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Done.this, Home.class);
+                Intent intent = new Intent(Done.this, StudentActivity.class);
                 startActivity(intent);
                 finish();
             }

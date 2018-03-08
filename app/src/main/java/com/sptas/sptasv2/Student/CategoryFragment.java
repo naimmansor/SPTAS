@@ -1,4 +1,4 @@
-package com.sptas.sptasv2;
+package com.sptas.sptasv2.Student;
 
 
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Interface.ItemClickListener;
 import com.sptas.sptasv2.Model.Category;
+import com.sptas.sptasv2.R;
 import com.sptas.sptasv2.ViewHolder.CategoryViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -50,7 +51,7 @@ public class CategoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        myFragment = inflater.inflate(R.layout.fragment_category, container, false);
+        myFragment = inflater.inflate(R.layout.student_fragment_category, container, false);
 
         listCategory = (RecyclerView) myFragment.findViewById(R.id.listCategory);
         listCategory.setHasFixedSize(true);
@@ -65,7 +66,7 @@ public class CategoryFragment extends Fragment {
     private void loadCategories() {
         adapter = new FirebaseRecyclerAdapter<Category, CategoryViewHolder>(
                 Category.class,
-                R.layout.category_layout,
+                R.layout.student_category_layout,
                 CategoryViewHolder.class,
                 categories
         ) {

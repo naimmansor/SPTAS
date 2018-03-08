@@ -1,4 +1,4 @@
-package com.sptas.sptasv2;
+package com.sptas.sptasv2.Student;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import com.sptas.sptasv2.Interface.ItemClickListener;
 import com.sptas.sptasv2.Interface.RankingCallBack;
 import com.sptas.sptasv2.Model.QuestionScore;
 import com.sptas.sptasv2.Model.Ranking;
+import com.sptas.sptasv2.R;
 import com.sptas.sptasv2.ViewHolder.RankingViewHolder;
 
 
@@ -56,7 +57,7 @@ public class RankingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        myFragment = inflater.inflate(R.layout.fragment_ranking, container, false);
+        myFragment = inflater.inflate(R.layout.student_fragment_ranking, container, false);
 
         // Init View
         rankingList = (RecyclerView) myFragment.findViewById(R.id.rankingList);
@@ -83,7 +84,7 @@ public class RankingFragment extends Fragment {
         // Set Adapter
         adapter = new FirebaseRecyclerAdapter<Ranking, RankingViewHolder>(
                 Ranking.class,
-                R.layout.layout_ranking,
+                R.layout.student_layout_ranking,
                 RankingViewHolder.class,
                 rankingTbl.orderByChild("score")
         ) {

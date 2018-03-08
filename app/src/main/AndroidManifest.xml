@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StudentActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,11 +19,11 @@
 
         <receiver android:name=".BroadcastReceiver.AlarmReceiver" />
 
-        <activity android:name=".Home" />
-        <activity android:name=".Start" />
-        <activity android:name=".Playing" />
-        <activity android:name=".Done" />
-        <activity android:name=".ScoreDetail" />
+        <activity android:name=".StudentActivity" />
+        <activity android:name=".Student.Start" />
+        <activity android:name=".Student.Playing" />
+        <activity android:name=".Student.Done" />
+        <activity android:name=".Student.ScoreDetail" />
 
         <service android:name=".BroadcastReceiver.MyFirebaseIdService">
             <intent-filter>
