@@ -36,7 +36,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Student.StudentFragment"></activity>
+        <activity android:name=".Student.ProfileFragment"></activity>
     </application>
 
 </manifest>

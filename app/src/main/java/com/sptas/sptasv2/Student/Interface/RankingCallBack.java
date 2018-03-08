@@ -1,4 +1,4 @@
-package com.sptas.sptasv2.Interface;
+package com.sptas.sptasv2.Student.Interface;
 
 /**
  * Created by Na'im Mansor on 22-Feb-18.

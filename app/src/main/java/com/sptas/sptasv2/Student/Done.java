@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Model.QuestionScore;
 import com.sptas.sptasv2.R;
+import com.sptas.sptasv2.Student.Common.Common;
+import com.sptas.sptasv2.Student.Model.QuestionScore;
 import com.sptas.sptasv2.StudentActivity;
 
 public class Done extends AppCompatActivity {

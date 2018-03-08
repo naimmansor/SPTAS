@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/graylight"
     android:orientation="vertical"
-    tools:context="com.sptas.sptasv2.Student.StudentFragment">
+    tools:context="com.sptas.sptasv2.Student.ProfileFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

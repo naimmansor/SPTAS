@@ -1,4 +1,4 @@
-package com.sptas.sptasv2.Model;
+package com.sptas.sptasv2.Student.Model;
 
 /**
  * Created by Na'im Mansor on 20-Feb-18.

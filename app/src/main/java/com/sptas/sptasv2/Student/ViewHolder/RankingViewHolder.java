@@ -1,11 +1,11 @@
-package com.sptas.sptasv2.ViewHolder;
+package com.sptas.sptasv2.Student.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.sptas.sptasv2.Interface.ItemClickListener;
 import com.sptas.sptasv2.R;
+import com.sptas.sptasv2.Student.Interface.ItemClickListener;
 
 /**
  * Created by Na'im Mansor on 22-Feb-18.

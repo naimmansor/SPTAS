@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.R;
+import com.sptas.sptasv2.Student.Common.Common;
 import com.squareup.picasso.Picasso;
 
 public class Playing extends AppCompatActivity implements View.OnClickListener {

@@ -8,9 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.sptas.sptasv2.Model.QuestionScore;
 import com.sptas.sptasv2.R;
-import com.sptas.sptasv2.ViewHolder.ScoreDetailViewHolder;
+import com.sptas.sptasv2.Student.Model.QuestionScore;
+import com.sptas.sptasv2.Student.ViewHolder.ScoreDetailViewHolder;
 
 public class ScoreDetail extends AppCompatActivity {
 

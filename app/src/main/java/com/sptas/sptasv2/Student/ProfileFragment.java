@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Model.Ranking;
 import com.sptas.sptasv2.R;
+import com.sptas.sptasv2.Student.Common.Common;
+import com.sptas.sptasv2.Student.Model.Ranking;
 
-public class StudentFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
     View myFragment;
     TextView txt_name, txt_email, txt_phone, txt_class, txt_sv, txt_score;
@@ -24,9 +24,9 @@ public class StudentFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference ranking;
 
-    public static StudentFragment newInstance() {
-        StudentFragment studentFragment = new StudentFragment();
-        return studentFragment;
+    public static ProfileFragment newInstance() {
+        ProfileFragment profileFragment = new ProfileFragment();
+        return profileFragment;
     }
 
     @Override

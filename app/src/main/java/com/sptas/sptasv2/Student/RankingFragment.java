@@ -16,13 +16,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Interface.ItemClickListener;
-import com.sptas.sptasv2.Interface.RankingCallBack;
-import com.sptas.sptasv2.Model.QuestionScore;
-import com.sptas.sptasv2.Model.Ranking;
 import com.sptas.sptasv2.R;
-import com.sptas.sptasv2.ViewHolder.RankingViewHolder;
+import com.sptas.sptasv2.Student.Common.Common;
+import com.sptas.sptasv2.Student.Interface.ItemClickListener;
+import com.sptas.sptasv2.Student.Interface.RankingCallBack;
+import com.sptas.sptasv2.Student.Model.QuestionScore;
+import com.sptas.sptasv2.Student.Model.Ranking;
+import com.sptas.sptasv2.Student.ViewHolder.RankingViewHolder;
 
 
 public class RankingFragment extends Fragment {

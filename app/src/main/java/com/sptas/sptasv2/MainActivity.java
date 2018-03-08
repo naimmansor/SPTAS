@@ -19,8 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.sptas.sptasv2.BroadcastReceiver.AlarmReceiver;
-import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Model.User;
+import com.sptas.sptasv2.Student.Common.Common;
+import com.sptas.sptasv2.Student.Model.User;
 
 import java.util.Calendar;
 
