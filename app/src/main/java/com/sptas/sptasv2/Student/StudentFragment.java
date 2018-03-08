@@ -3,50 +3,46 @@ package com.sptas.sptasv2.Student;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Model.User;
+import com.sptas.sptasv2.Model.Ranking;
 import com.sptas.sptasv2.R;
-import com.sptas.sptasv2.ViewHolder.StudentViewHolder;
 
 public class StudentFragment extends Fragment {
 
     View myFragment;
+    TextView txt_name, txt_email, txt_phone, txt_class, txt_sv, txt_score;
 
-    RecyclerView listStudent;
-    RecyclerView.LayoutManager layoutManager;
-    FirebaseRecyclerAdapter<User, StudentViewHolder> adapter;
+    Ranking score;
 
     FirebaseDatabase database;
-    DatabaseReference student_profile;
+    DatabaseReference ranking;
 
     public static StudentFragment newInstance() {
         StudentFragment studentFragment = new StudentFragment();
         return studentFragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        myFragment = inflater.inflate(R.layout.fragment_student, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // Firebase
         database = FirebaseDatabase.getInstance();
-        student_profile = database.getReference("Users");
+        ranking = database.getReference("Ranking");
 
-        //View
-        listStudent = (RecyclerView) myFragment.findViewById(R.id.listStudent);
-        listStudent.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(container.getContext());
-        listStudent.setLayoutManager(layoutManager);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        myFragment = inflater.inflate(R.layout.student_profile_layout, container, false);
 
         loadStudentProfile();
 
@@ -54,24 +50,20 @@ public class StudentFragment extends Fragment {
     }
 
     private void loadStudentProfile() {
-        adapter = new FirebaseRecyclerAdapter<User, StudentViewHolder>(
-                User.class,
-                R.layout.student_profile_layout,
-                StudentViewHolder.class,
-                student_profile
-        ) {
-            @Override
-            protected void populateViewHolder(StudentViewHolder viewHolder, User model, int position) {
-                viewHolder.txt_name.setText(Common.currentUser.getUserName().toUpperCase());
-                viewHolder.txt_email.setText(Common.currentUser.getEmail());
-                viewHolder.txt_phone.setText(Common.currentUser.getNoPhone());
-                viewHolder.txt_class.setText(Common.currentUser.getYear());
-                viewHolder.txt_sv.setText(Common.currentUser.getSv());
-            }
-        };
-        adapter.notifyDataSetChanged();
-        listStudent.setAdapter(adapter);
+
+        txt_score = (TextView) myFragment.findViewById(R.id.txt_score);
+        txt_name = (TextView) myFragment.findViewById(R.id.txt_name);
+        txt_email = (TextView) myFragment.findViewById(R.id.txt_email);
+        txt_phone = (TextView) myFragment.findViewById(R.id.txt_phone);
+        txt_class = (TextView) myFragment.findViewById(R.id.txt_class);
+        txt_sv = (TextView) myFragment.findViewById(R.id.txt_sv);
+
+
+        txt_name.setText(Common.currentUser.getUserName().toUpperCase());
+        txt_email.setText(Common.currentUser.getEmail());
+        txt_phone.setText(Common.currentUser.getNoPhone());
+        txt_class.setText(Common.currentUser.getYear());
+        txt_sv.setText(Common.currentUser.getSv());
+
     }
-
-
 }

@@ -24,7 +24,7 @@ import com.sptas.sptasv2.Model.User;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class StudentActivity extends AppCompatActivity {
     MaterialEditText edtNewUser, edtNewPassword, edtNewEmail, edtNewNoPhone, edtNewYear, edtNewSV; //for Sign Up
     MaterialEditText edtUser, edtPassword; //for Sign In
 
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
         calender.set(Calendar.MINUTE, 10);
         calender.set(Calendar.SECOND, 0);
 
-        Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(StudentActivity.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(StudentActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calender.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
@@ -86,17 +86,17 @@ public class MainActivity extends AppCompatActivity {
                     if (!user.isEmpty()) {
                         User login = dataSnapshot.child(user).getValue(User.class);
                         if (login.getPassword().equals(pwd)) {
-                            Intent homeActivity = new Intent(MainActivity.this, Home.class);
+                            Intent homeActivity = new Intent(StudentActivity.this, Home.class);
                             Common.currentUser = login;
                             startActivity(homeActivity);
                             finish();
                         } else
-                            Toast.makeText(MainActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(StudentActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MainActivity.this, "Please enter your user name", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentActivity.this, "Please enter your user name", Toast.LENGTH_SHORT).show();
                     }
                 } else
-                    Toast.makeText(MainActivity.this, "User is not exists! ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentActivity.this, "User is not exists! ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showSignUpDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(StudentActivity.this);
         alertDialog.setTitle("Sign Up");
         alertDialog.setMessage("Please fill full Information");
 
@@ -145,11 +145,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.child(user.getUserName()).exists())
-                            Toast.makeText(MainActivity.this, "User already exists! ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(StudentActivity.this, "User already exists! ", Toast.LENGTH_SHORT).show();
                         else {
                             users.child(user.getUserName())
                                     .setValue(user);
-                            Toast.makeText(MainActivity.this, "User registration success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(StudentActivity.this, "User registration success", Toast.LENGTH_SHORT).show();
                         }
                     }
 
