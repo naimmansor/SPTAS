@@ -1,4 +1,4 @@
-package com.sptas.sptasv2.Student.Interface;
+package com.sptas.sptasv2.Interface;
 
 import android.view.View;
 

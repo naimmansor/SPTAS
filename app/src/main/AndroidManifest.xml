@@ -19,6 +19,7 @@
 
         <receiver android:name=".BroadcastReceiver.AlarmReceiver" />
 
+        <activity android:name=".LecturerActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".Student.Start" />
         <activity android:name=".Student.Playing" />
@@ -36,7 +37,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Student.ProfileFragment"></activity>
+        <activity android:name=".Lecturer.QuestionBank"></activity>
     </application>
 
 </manifest>

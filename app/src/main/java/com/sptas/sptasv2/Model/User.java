@@ -1,10 +1,11 @@
-package com.sptas.sptasv2.Student.Model;
+package com.sptas.sptasv2.Model;
 
 /**
  * Created by Na'im Mansor on 06-Feb-18.
  */
 
 public class User {
+    private String userType;
     private String userName;
     private String password;
     private String email;
@@ -16,13 +17,22 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String password, String email, String noPhone, String year, String sv) {
+    public User(String userType, String userName, String password, String email, String noPhone, String year, String sv) {
+        this.userType = userType;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.noPhone = noPhone;
         this.year = year;
         this.sv = sv;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getUserName() {

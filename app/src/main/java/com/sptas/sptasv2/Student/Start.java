@@ -11,9 +11,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sptas.sptasv2.Common.Common;
+import com.sptas.sptasv2.Model.Question;
 import com.sptas.sptasv2.R;
-import com.sptas.sptasv2.Student.Common.Common;
-import com.sptas.sptasv2.Student.Model.Question;
 
 import java.util.Collections;
 

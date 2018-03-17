@@ -17,10 +17,10 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Student.CategoryFragment;
-import com.sptas.sptasv2.Student.Common.Common;
-import com.sptas.sptasv2.Student.ProfileFragment;
 import com.sptas.sptasv2.Student.RankingFragment;
+import com.sptas.sptasv2.Student.StudentFragment;
 
 public class StudentActivity extends AppCompatActivity {
 
@@ -56,7 +56,7 @@ public class StudentActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.action_studentProfile:
-                        selectedFragment = ProfileFragment.newInstance();
+                        selectedFragment = StudentFragment.newInstance();
                         break;
                     case R.id.action_category:
                         selectedFragment = CategoryFragment.newInstance();
@@ -116,7 +116,7 @@ public class StudentActivity extends AppCompatActivity {
 
     private void setDefaultFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, ProfileFragment.newInstance());
+        transaction.replace(R.id.frame_layout, StudentFragment.newInstance());
         transaction.commit();
     }
 }

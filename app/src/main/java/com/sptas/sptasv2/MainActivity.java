@@ -19,13 +19,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.sptas.sptasv2.BroadcastReceiver.AlarmReceiver;
-import com.sptas.sptasv2.Student.Common.Common;
-import com.sptas.sptasv2.Student.Model.User;
+import com.sptas.sptasv2.Common.Common;
+import com.sptas.sptasv2.Model.User;
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    MaterialEditText edtNewUser, edtNewPassword, edtNewEmail, edtNewNoPhone, edtNewYear, edtNewSV; //for Sign Up
+    MaterialEditText edtNewUserType, edtNewUser, edtNewPassword, edtNewEmail, edtNewNoPhone, edtNewYear, edtNewSV; //for Sign Up
     MaterialEditText edtUser, edtPassword; //for Sign In
 
     Button btnSignUp, btnSignIn;
@@ -86,10 +86,18 @@ public class MainActivity extends AppCompatActivity {
                     if (!user.isEmpty()) {
                         User login = dataSnapshot.child(user).getValue(User.class);
                         if (login.getPassword().equals(pwd)) {
-                            Intent homeActivity = new Intent(MainActivity.this, StudentActivity.class);
-                            Common.currentUser = login;
-                            startActivity(homeActivity);
-                            finish();
+                            Intent homeActivity;
+                            if (login.getUserType().equals("Lecturer")) {
+                                homeActivity = new Intent(MainActivity.this, LecturerActivity.class);
+                                Common.currentUser = login;
+                                startActivity(homeActivity);
+                                finish();
+                            } else {
+                                homeActivity = new Intent(MainActivity.this, StudentActivity.class);
+                                Common.currentUser = login;
+                                startActivity(homeActivity);
+                                finish();
+                            }
                         } else
                             Toast.makeText(MainActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                     } else {
@@ -134,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                final User user = new User(edtNewUser.getText().toString(),
+                final User user = new User("Student",
+                        edtNewUser.getText().toString(),
                         edtNewPassword.getText().toString(),
                         edtNewEmail.getText().toString(),
                         edtNewNoPhone.getText().toString(),

@@ -14,11 +14,11 @@ import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sptas.sptasv2.Common.Common;
+import com.sptas.sptasv2.Interface.ItemClickListener;
+import com.sptas.sptasv2.Model.Category;
 import com.sptas.sptasv2.R;
-import com.sptas.sptasv2.Student.Common.Common;
-import com.sptas.sptasv2.Student.Interface.ItemClickListener;
-import com.sptas.sptasv2.Student.Model.Category;
-import com.sptas.sptasv2.Student.ViewHolder.CategoryViewHolder;
+import com.sptas.sptasv2.ViewHolder.CategoryViewHolder;
 import com.squareup.picasso.Picasso;
 
 

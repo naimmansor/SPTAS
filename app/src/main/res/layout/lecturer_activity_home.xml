@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_vertical"
-    tools:context="com.sptas.sptasv2.StudentActivity">
+    tools:context="com.sptas.sptasv2.LecturerActivity">
 
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -22,6 +22,6 @@
         android:background="@color/colorPrimary"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@drawable/nav_item_color_state"
-        app:menu="@menu/student_bottom_menu" />
+        app:menu="@menu/lecturer_bottom_menu" />
 
 </RelativeLayout>
