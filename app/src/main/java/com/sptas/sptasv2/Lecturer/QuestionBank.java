@@ -1,13 +1,14 @@
 package com.sptas.sptasv2.Lecturer;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,11 +28,11 @@ public class QuestionBank extends Fragment {
 
     public static String userId;
     View myFragment;
-    Button btnSave;
-    EditText edtName;
     DatabaseReference databaseReference;
     ListView listViewUsers;
     List<Test> tests;
+    private FloatingActionButton btnAdd;
+    private EditText edtName;
 
     public static QuestionBank newInstance() {
         QuestionBank questionBank = new QuestionBank();
@@ -49,32 +50,62 @@ public class QuestionBank extends Fragment {
         myFragment = inflater.inflate(R.layout.lecturer_activity_question_bank, container, false);
 
         tests = new ArrayList<Test>();
-        databaseReference = FirebaseDatabase.getInstance().getReference("QuestionBank");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Question_Bank");
 
-        btnSave = (Button) myFragment.findViewById(R.id.btnSave);
+        // components from main.xml
+        btnAdd = (FloatingActionButton) myFragment.findViewById(R.id.buttonPrompt);
         edtName = (EditText) myFragment.findViewById(R.id.edtName);
+
         listViewUsers = (ListView) myFragment.findViewById(R.id.listViewUsers);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = edtName.getText().toString();
+                // get prompts.xml view
+                LayoutInflater li = LayoutInflater.from(getContext());
+                View promptsView = li.inflate(R.layout.lecturer_create_question, null);
 
-                if (TextUtils.isEmpty(userId)) {
-                    //save
-                    String id = databaseReference.push().getKey();
-                    Test test = new Test(id, name);
-                    databaseReference.child(id).setValue(test);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        getContext());
 
-                    Toast.makeText(getActivity(), "Test Created Successfully!", Toast.LENGTH_SHORT).show();
-                } else {
-                    //update
-                    databaseReference.child(userId).child("name").setValue(name);
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
 
-                    Toast.makeText(getActivity(), "Test Updated Successfully!", Toast.LENGTH_SHORT).show();
-                }
+                final EditText userInput = (EditText) promptsView
+                        .findViewById(R.id.edtName);
 
-                edtName.setText(null);
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Save",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                        String name = userInput.getText().toString();
+
+                                        //save
+                                        String uid = databaseReference.push().getKey();
+                                        Test test = new Test(uid, name);
+                                        databaseReference.child(uid).setValue(test);
+
+                                        Toast.makeText(getActivity(), "Test Created Successfully!", Toast.LENGTH_SHORT).show();
+
+                                        userInput.setText(null);
+                                    }
+                                })
+                        .setNegativeButton("Discard",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
         });
 

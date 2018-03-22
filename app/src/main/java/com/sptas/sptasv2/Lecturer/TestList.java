@@ -1,7 +1,9 @@
 package com.sptas.sptasv2.Lecturer;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.sptas.sptasv2.Model.Test;
@@ -22,6 +25,7 @@ import java.util.List;
 
 public class TestList extends ArrayAdapter<Test> {
 
+    public static String userId;
     DatabaseReference databaseReference;
     EditText edtName;
     private Activity context;
@@ -56,8 +60,52 @@ public class TestList extends ArrayAdapter<Test> {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtName.setText(test.getName());
-                QuestionBank.userId = test.getId();
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.lecturer_create_question, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                final EditText userInput = (EditText) promptsView
+                        .findViewById(R.id.edtName);
+
+                userInput.setText(test.getName());
+                userId = test.getId();
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Update",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                        String name = userInput.getText().toString();
+
+                                        //update
+                                        databaseReference.child(userId).child("name").setValue(name);
+
+                                        Toast.makeText(context, "Test Updated Successfully!", Toast.LENGTH_SHORT).show();
+
+                                        userInput.setText(null);
+                                    }
+                                })
+                        .setNegativeButton("Discard",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
             }
         });
 
