@@ -3,12 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/categoryId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View" />
 
     <Button
         android:id="@+id/btnUpdate"

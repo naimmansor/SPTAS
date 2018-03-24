@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question :"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/edtCategoryId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category ID">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Question">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtAnswerA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Answer A">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtAnswerB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Answer B">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtAnswerC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Answer C">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtAnswerD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Answer D">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtCorrAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correct Answer">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtIsImageQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Image Question">
+
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>

@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sptas.sptasv2.Model.Test;
+import com.sptas.sptasv2.Model.Question;
 import com.sptas.sptasv2.R;
 
 import java.util.ArrayList;
@@ -26,13 +26,12 @@ import java.util.List;
 
 public class QuestionBank extends Fragment {
 
-    public static String userId;
     View myFragment;
     DatabaseReference databaseReference;
     ListView listViewUsers;
-    List<Test> tests;
+    List<Question> questions;
     private FloatingActionButton btnAdd;
-    private EditText edtName;
+    private EditText edtCategoryId, edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer, edtIsImageQuestion;
 
     public static QuestionBank newInstance() {
         QuestionBank questionBank = new QuestionBank();
@@ -49,12 +48,19 @@ public class QuestionBank extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragment = inflater.inflate(R.layout.lecturer_activity_question_bank, container, false);
 
-        tests = new ArrayList<Test>();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Question_Bank");
+        questions = new ArrayList<Question>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Questions");
 
         // components from main.xml
         btnAdd = (FloatingActionButton) myFragment.findViewById(R.id.buttonPrompt);
-        edtName = (EditText) myFragment.findViewById(R.id.edtName);
+        edtCategoryId = (EditText) myFragment.findViewById(R.id.edtCategoryId);
+        edtQuestion = (EditText) myFragment.findViewById(R.id.edtQuestion);
+        edtAnswerA = (EditText) myFragment.findViewById(R.id.edtAnswerA);
+        edtAnswerB = (EditText) myFragment.findViewById(R.id.edtAnswerB);
+        edtAnswerC = (EditText) myFragment.findViewById(R.id.edtAnswerC);
+        edtAnswerD = (EditText) myFragment.findViewById(R.id.edtAnswerD);
+        edtCorrAnswer = (EditText) myFragment.findViewById(R.id.edtCorrAnswer);
+        edtIsImageQuestion = (EditText) myFragment.findViewById(R.id.edtIsImageQuestion);
 
         listViewUsers = (ListView) myFragment.findViewById(R.id.listViewUsers);
 
@@ -63,7 +69,7 @@ public class QuestionBank extends Fragment {
             public void onClick(View view) {
                 // get prompts.xml view
                 LayoutInflater li = LayoutInflater.from(getContext());
-                View promptsView = li.inflate(R.layout.lecturer_create_question, null);
+                View promptsView = li.inflate(R.layout.lecturer_popup_question, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         getContext());
@@ -71,8 +77,29 @@ public class QuestionBank extends Fragment {
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-                final EditText userInput = (EditText) promptsView
-                        .findViewById(R.id.edtName);
+                final EditText categoryId = (EditText) promptsView
+                        .findViewById(R.id.edtCategoryId);
+
+                final EditText question = (EditText) promptsView
+                        .findViewById(R.id.edtQuestion);
+
+                final EditText questionAnswerA = (EditText) promptsView
+                        .findViewById(R.id.edtAnswerA);
+
+                final EditText questionAnswerB = (EditText) promptsView
+                        .findViewById(R.id.edtAnswerB);
+
+                final EditText questionAnswerC = (EditText) promptsView
+                        .findViewById(R.id.edtAnswerC);
+
+                final EditText questionAnswerD = (EditText) promptsView
+                        .findViewById(R.id.edtAnswerD);
+
+                final EditText correctAnswer = (EditText) promptsView
+                        .findViewById(R.id.edtCorrAnswer);
+
+                final EditText isImageQuestion = (EditText) promptsView
+                        .findViewById(R.id.edtIsImageQuestion);
 
                 // set dialog message
                 alertDialogBuilder
@@ -82,19 +109,26 @@ public class QuestionBank extends Fragment {
                                     public void onClick(DialogInterface dialog, int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        String name = userInput.getText().toString();
+                                        String questionCategoryId = categoryId.getText().toString();
+                                        String questionName = question.getText().toString();
+                                        String answerA = questionAnswerA.getText().toString();
+                                        String answerB = questionAnswerB.getText().toString();
+                                        String answerC = questionAnswerC.getText().toString();
+                                        String answerD = questionAnswerD.getText().toString();
+                                        String corrAnswer = correctAnswer.getText().toString();
+                                        String image = isImageQuestion.getText().toString();
 
                                         //save
                                         String uid = databaseReference.push().getKey();
-                                        Test test = new Test(uid, name);
+                                        Question test = new Question(uid, questionName, answerA, answerB, answerC, answerD, corrAnswer, questionCategoryId, image);
                                         databaseReference.child(uid).setValue(test);
 
-                                        Toast.makeText(getActivity(), "Test Created Successfully!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), "Question Created Successfully!", Toast.LENGTH_SHORT).show();
 
-                                        userInput.setText(null);
+                                        question.setText(null);
                                     }
                                 })
-                        .setNegativeButton("Discard",
+                        .setNegativeButton("Cancel",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
@@ -119,15 +153,15 @@ public class QuestionBank extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                tests.clear();
+                questions.clear();
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Test test = postSnapshot.getValue(Test.class);
-                    tests.add(test);
+                    Question question = postSnapshot.getValue(Question.class);
+                    questions.add(question);
                 }
 
-                TestList testAdapter = new TestList(getActivity(), tests, databaseReference, edtName);
-                listViewUsers.setAdapter(testAdapter);
+                QuestionList questionAdapter = new QuestionList(getActivity(), questions, databaseReference, edtCategoryId, edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer, edtIsImageQuestion);
+                listViewUsers.setAdapter(questionAdapter);
             }
 
             @Override

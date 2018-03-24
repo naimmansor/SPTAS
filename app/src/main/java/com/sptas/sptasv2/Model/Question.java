@@ -5,20 +5,29 @@ package com.sptas.sptasv2.Model;
  */
 
 public class Question {
-    private String Question, AnswerA, AnswerB, AnswerC, AnswerD, CorrectAnswer, CategoryId, IsImageQuestion;
+    private String id, Question, AnswerA, AnswerB, AnswerC, AnswerD, CorrectAnswer, CategoryId, IsImageQuestion;
 
     public Question() {
     }
 
-    public Question(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String categoryId, String isImageQuestion) {
+    public Question(String id, String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String CategoryId, String isImageQuestion) {
+        this.id = id;
         Question = question;
         AnswerA = answerA;
         AnswerB = answerB;
         AnswerC = answerC;
         AnswerD = answerD;
         CorrectAnswer = correctAnswer;
-        CategoryId = categoryId;
+        this.CategoryId = CategoryId;
         IsImageQuestion = isImageQuestion;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getQuestion() {
@@ -70,11 +79,11 @@ public class Question {
     }
 
     public String getCategoryId() {
-        return CategoryId;
+        return this.CategoryId;
     }
 
-    public void setCategoryId(String categoryId) {
-        CategoryId = categoryId;
+    public void setCategoryId(String CategoryId) {
+        this.CategoryId = CategoryId;
     }
 
     public String getIsImageQuestion() {
