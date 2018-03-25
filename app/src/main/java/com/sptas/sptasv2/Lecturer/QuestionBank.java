@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +33,10 @@ public class QuestionBank extends Fragment {
     ListView listViewUsers;
     List<Question> questions;
     private FloatingActionButton btnAdd;
-    private EditText edtCategoryId, edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer, edtIsImageQuestion;
+    private EditText edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer;
+    private RadioGroup edtCategoryId, edtIsImageQuestion;
+
+    private String image, cid = "";
 
     public static QuestionBank newInstance() {
         QuestionBank questionBank = new QuestionBank();
@@ -53,15 +58,14 @@ public class QuestionBank extends Fragment {
 
         // components from main.xml
         btnAdd = (FloatingActionButton) myFragment.findViewById(R.id.buttonPrompt);
-        edtCategoryId = (EditText) myFragment.findViewById(R.id.edtCategoryId);
+        edtCategoryId = (RadioGroup) myFragment.findViewById(R.id.edtCategoryId);
         edtQuestion = (EditText) myFragment.findViewById(R.id.edtQuestion);
         edtAnswerA = (EditText) myFragment.findViewById(R.id.edtAnswerA);
         edtAnswerB = (EditText) myFragment.findViewById(R.id.edtAnswerB);
         edtAnswerC = (EditText) myFragment.findViewById(R.id.edtAnswerC);
         edtAnswerD = (EditText) myFragment.findViewById(R.id.edtAnswerD);
         edtCorrAnswer = (EditText) myFragment.findViewById(R.id.edtCorrAnswer);
-        edtIsImageQuestion = (EditText) myFragment.findViewById(R.id.edtIsImageQuestion);
-
+        edtIsImageQuestion = (RadioGroup) myFragment.findViewById(R.id.edtIsImageQuestion);
         listViewUsers = (ListView) myFragment.findViewById(R.id.listViewUsers);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +81,8 @@ public class QuestionBank extends Fragment {
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-                final EditText categoryId = (EditText) promptsView
-                        .findViewById(R.id.edtCategoryId);
+                final RadioButton categoryIdDS = (RadioButton) promptsView
+                        .findViewById(R.id.edtCategoryIdDS);
 
                 final EditText question = (EditText) promptsView
                         .findViewById(R.id.edtQuestion);
@@ -98,8 +102,8 @@ public class QuestionBank extends Fragment {
                 final EditText correctAnswer = (EditText) promptsView
                         .findViewById(R.id.edtCorrAnswer);
 
-                final EditText isImageQuestion = (EditText) promptsView
-                        .findViewById(R.id.edtIsImageQuestion);
+                final RadioButton isImageQuestionTrue = (RadioButton) promptsView
+                        .findViewById(R.id.edtIsImageQuestionTrue);
 
                 // set dialog message
                 alertDialogBuilder
@@ -109,18 +113,31 @@ public class QuestionBank extends Fragment {
                                     public void onClick(DialogInterface dialog, int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        String questionCategoryId = categoryId.getText().toString();
+
+                                        //condition checkbox
+                                        if (categoryIdDS.isChecked()) {
+                                            cid = "01";
+                                        } else {
+                                            cid = "02";
+                                        }
+
                                         String questionName = question.getText().toString();
                                         String answerA = questionAnswerA.getText().toString();
                                         String answerB = questionAnswerB.getText().toString();
                                         String answerC = questionAnswerC.getText().toString();
                                         String answerD = questionAnswerD.getText().toString();
                                         String corrAnswer = correctAnswer.getText().toString();
-                                        String image = isImageQuestion.getText().toString();
+
+                                        //condition checkbox
+                                        if (isImageQuestionTrue.isChecked()) {
+                                            image = "true";
+                                        } else {
+                                            image = "false";
+                                        }
 
                                         //save
                                         String uid = databaseReference.push().getKey();
-                                        Question test = new Question(uid, questionName, answerA, answerB, answerC, answerD, corrAnswer, questionCategoryId, image);
+                                        Question test = new Question(uid, questionName, answerA, answerB, answerC, answerD, corrAnswer, cid, image);
                                         databaseReference.child(uid).setValue(test);
 
                                         Toast.makeText(getActivity(), "Question Created Successfully!", Toast.LENGTH_SHORT).show();

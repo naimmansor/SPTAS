@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +29,15 @@ public class QuestionList extends ArrayAdapter<Question> {
 
     public static String userId;
     DatabaseReference databaseReference;
-    EditText edtCategoryId, edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer, edtIsImageQuestion;
+    EditText edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer;
+    RadioGroup edtCategoryId, edtIsImageQuestion;
+    ;
     private Activity context;
     private List<Question> questions;
 
-    public QuestionList(@NonNull Activity context, List<Question> questions, DatabaseReference databaseReference, EditText edtCategoryId, EditText edtQuestion, EditText edtAnswerA, EditText edtAnswerB, EditText edtAnswerC, EditText edtAnswerD, EditText edtCorrAnswer, EditText edtIsImageQuestion) {
+    private String image, cid = "";
+
+    public QuestionList(@NonNull Activity context, List<Question> questions, DatabaseReference databaseReference, RadioGroup edtCategoryId, EditText edtQuestion, EditText edtAnswerA, EditText edtAnswerB, EditText edtAnswerC, EditText edtAnswerD, EditText edtCorrAnswer, RadioGroup edtIsImageQuestion) {
         super(context, R.layout.lecturer_question_bank_layout, questions);
         this.context = context;
         this.questions = questions;
@@ -51,19 +57,16 @@ public class QuestionList extends ArrayAdapter<Question> {
         View listViewItem = inflater.inflate(R.layout.lecturer_question_bank_layout, null, true);
 
         TextView categoryId = (TextView) listViewItem.findViewById(R.id.categoryId);
-        TextView txtQuestion = (TextView) listViewItem.findViewById(R.id.txtQuestion);
-        TextView txtAnswerA = (TextView) listViewItem.findViewById(R.id.txtAnswerA);
-        TextView txtAnswerB = (TextView) listViewItem.findViewById(R.id.txtAnswerB);
-        TextView txtAnswerC = (TextView) listViewItem.findViewById(R.id.txtAnswerC);
-        TextView txtAnswerD = (TextView) listViewItem.findViewById(R.id.txtAnswerD);
-        TextView corrAnswer = (TextView) listViewItem.findViewById(R.id.corrAnswer);
-        TextView IsImageQuestion = (TextView) listViewItem.findViewById(R.id.IsImageQuestion);
         Button btnDelete = (Button) listViewItem.findViewById(R.id.btnDelete);
         Button btnUpdate = (Button) listViewItem.findViewById(R.id.btnUpdate);
         Button btnView = (Button) listViewItem.findViewById(R.id.btnView);
 
         final Question question = questions.get(pos);
-        categoryId.setText(question.getCategoryId());
+        if (question.getCategoryId().equals("01")) {
+            categoryId.setText("DS");
+        } else if (question.getCategoryId().equals("02")) {
+            categoryId.setText("SE");
+        }
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +87,11 @@ public class QuestionList extends ArrayAdapter<Question> {
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-                final EditText edtcategoryId = (EditText) promptsView
+                final RadioGroup categoryId = (RadioGroup) promptsView
                         .findViewById(R.id.edtCategoryId);
+
+                final RadioButton categoryIdDS = (RadioButton) promptsView
+                        .findViewById(R.id.edtCategoryIdDS);
 
                 final EditText txtquestion = (EditText) promptsView
                         .findViewById(R.id.edtQuestion);
@@ -105,17 +111,31 @@ public class QuestionList extends ArrayAdapter<Question> {
                 final EditText correctAnswer = (EditText) promptsView
                         .findViewById(R.id.edtCorrAnswer);
 
-                final EditText isImageQuestion = (EditText) promptsView
+                final RadioGroup isImageQuestion = (RadioGroup) promptsView
                         .findViewById(R.id.edtIsImageQuestion);
 
-                edtcategoryId.setText(question.getCategoryId());
+                final RadioButton isImageQuestionTrue = (RadioButton) promptsView
+                        .findViewById(R.id.edtIsImageQuestionTrue);
+
+                if (question.getCategoryId().equals("02")) {
+                    categoryId.check(R.id.edtCategoryIdSE);
+                } else {
+                    categoryId.check(R.id.edtCategoryIdDS);
+                }
+
                 txtquestion.setText(question.getQuestion());
                 questionAnswerA.setText(question.getAnswerA());
                 questionAnswerB.setText(question.getAnswerB());
                 questionAnswerC.setText(question.getAnswerC());
                 questionAnswerD.setText(question.getAnswerD());
                 correctAnswer.setText(question.getCorrectAnswer());
-                isImageQuestion.setText(question.getIsImageQuestion());
+
+                if (question.getIsImageQuestion().equals("true")) {
+                    isImageQuestion.check(R.id.edtIsImageQuestionTrue);
+                } else {
+                    isImageQuestion.check(R.id.edtIsImageQuestionFalse);
+                }
+
                 userId = question.getId();
 
                 // set dialog message
@@ -126,17 +146,30 @@ public class QuestionList extends ArrayAdapter<Question> {
                                     public void onClick(DialogInterface dialog, int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        String questionCategoryId = edtcategoryId.getText().toString();
+
+                                        //condition radio button
+                                        if (categoryIdDS.isChecked()) {
+                                            cid = "01";
+                                        } else {
+                                            cid = "02";
+                                        }
+
                                         String questionName = txtquestion.getText().toString();
                                         String answerA = questionAnswerA.getText().toString();
                                         String answerB = questionAnswerB.getText().toString();
                                         String answerC = questionAnswerC.getText().toString();
                                         String answerD = questionAnswerD.getText().toString();
                                         String corrAnswer = correctAnswer.getText().toString();
-                                        String image = isImageQuestion.getText().toString();
+
+                                        //condition radio button
+                                        if (isImageQuestionTrue.isChecked()) {
+                                            image = "true";
+                                        } else {
+                                            image = "false";
+                                        }
 
                                         //update
-                                        databaseReference.child(userId).child("categoryId").setValue(questionCategoryId);
+                                        databaseReference.child(userId).child("categoryId").setValue(cid);
                                         databaseReference.child(userId).child("question").setValue(questionName);
                                         databaseReference.child(userId).child("answerA").setValue(answerA);
                                         databaseReference.child(userId).child("answerB").setValue(answerB);

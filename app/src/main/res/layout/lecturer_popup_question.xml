@@ -12,14 +12,26 @@
         android:text="Question :"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
+    <RadioGroup
         android:id="@+id/edtCategoryId"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Category ID">
+        android:orientation="horizontal">
 
-        <requestFocus />
-    </EditText>
+        <RadioButton
+            android:id="@+id/edtCategoryIdDS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Data Structure" />
+
+        <RadioButton
+            android:id="@+id/edtCategoryIdSE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Software Engineering" />
+
+    </RadioGroup>
 
     <EditText
         android:id="@+id/edtQuestion"
@@ -75,13 +87,25 @@
         <requestFocus />
     </EditText>
 
-    <EditText
+    <RadioGroup
         android:id="@+id/edtIsImageQuestion"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Image Question">
+        android:orientation="horizontal">
 
-        <requestFocus />
-    </EditText>
+        <RadioButton
+            android:id="@+id/edtIsImageQuestionTrue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="True" />
+
+        <RadioButton
+            android:id="@+id/edtIsImageQuestionFalse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="False" />
+
+    </RadioGroup>
 
 </LinearLayout>
