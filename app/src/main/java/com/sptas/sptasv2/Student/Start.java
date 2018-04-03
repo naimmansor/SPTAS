@@ -34,7 +34,7 @@ public class Start extends AppCompatActivity {
 
         loadQuestion(Common.categoryId);
 
-        btnPlay = (Button) findViewById(R.id.btnPlay);
+        btnPlay = findViewById(R.id.btnPlay);
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override

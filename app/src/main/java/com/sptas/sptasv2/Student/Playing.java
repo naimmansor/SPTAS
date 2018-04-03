@@ -37,17 +37,17 @@ public class Playing extends AppCompatActivity implements View.OnClickListener {
 
 
         //Views
-        txtScore = (TextView) findViewById(R.id.txtScore);
-        txtQuestionNum = (TextView) findViewById(R.id.txtTotalQuestion);
-        question_text = (TextView) findViewById(R.id.question_text);
-        question_image = (ImageView) findViewById(R.id.question_image);
+        txtScore = findViewById(R.id.txtScore);
+        txtQuestionNum = findViewById(R.id.txtTotalQuestion);
+        question_text = findViewById(R.id.question_text);
+        question_image = findViewById(R.id.question_image);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
-        btnA = (Button) findViewById(R.id.btnAnswerA);
-        btnB = (Button) findViewById(R.id.btnAnswerB);
-        btnC = (Button) findViewById(R.id.btnAnswerC);
-        btnD = (Button) findViewById(R.id.btnAnswerD);
+        btnA = findViewById(R.id.btnAnswerA);
+        btnB = findViewById(R.id.btnAnswerB);
+        btnC = findViewById(R.id.btnAnswerC);
+        btnD = findViewById(R.id.btnAnswerD);
 
         btnA.setOnClickListener(this);
         btnB.setOnClickListener(this);

@@ -60,7 +60,7 @@ public class RankingFragment extends Fragment {
         myFragment = inflater.inflate(R.layout.student_fragment_ranking, container, false);
 
         // Init View
-        rankingList = (RecyclerView) myFragment.findViewById(R.id.rankingList);
+        rankingList = myFragment.findViewById(R.id.rankingList);
         layoutManager = new LinearLayoutManager(getActivity());
         rankingList.setHasFixedSize(false); // a bit change from tutorial => true
         // Because OrderByChild method of Firebase will sort list with ascending

@@ -25,7 +25,7 @@ public class LecturerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lecturer_activity_home);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView = findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

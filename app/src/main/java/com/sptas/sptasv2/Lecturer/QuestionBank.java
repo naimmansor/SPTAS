@@ -57,16 +57,16 @@ public class QuestionBank extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions");
 
         // components from main.xml
-        btnAdd = (FloatingActionButton) myFragment.findViewById(R.id.buttonPrompt);
-        edtCategoryId = (RadioGroup) myFragment.findViewById(R.id.edtCategoryId);
-        edtQuestion = (EditText) myFragment.findViewById(R.id.edtQuestion);
-        edtAnswerA = (EditText) myFragment.findViewById(R.id.edtAnswerA);
-        edtAnswerB = (EditText) myFragment.findViewById(R.id.edtAnswerB);
-        edtAnswerC = (EditText) myFragment.findViewById(R.id.edtAnswerC);
-        edtAnswerD = (EditText) myFragment.findViewById(R.id.edtAnswerD);
-        edtCorrAnswer = (EditText) myFragment.findViewById(R.id.edtCorrAnswer);
-        edtIsImageQuestion = (RadioGroup) myFragment.findViewById(R.id.edtIsImageQuestion);
-        listViewUsers = (ListView) myFragment.findViewById(R.id.listViewUsers);
+        btnAdd = myFragment.findViewById(R.id.buttonPrompt);
+        edtCategoryId = myFragment.findViewById(R.id.edtCategoryId);
+        edtQuestion = myFragment.findViewById(R.id.edtQuestion);
+        edtAnswerA = myFragment.findViewById(R.id.edtAnswerA);
+        edtAnswerB = myFragment.findViewById(R.id.edtAnswerB);
+        edtAnswerC = myFragment.findViewById(R.id.edtAnswerC);
+        edtAnswerD = myFragment.findViewById(R.id.edtAnswerD);
+        edtCorrAnswer = myFragment.findViewById(R.id.edtCorrAnswer);
+        edtIsImageQuestion = myFragment.findViewById(R.id.edtIsImageQuestion);
+        listViewUsers = myFragment.findViewById(R.id.listViewUsers);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,28 +81,28 @@ public class QuestionBank extends Fragment {
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-                final RadioButton categoryIdDS = (RadioButton) promptsView
+                final RadioButton categoryIdDS = promptsView
                         .findViewById(R.id.edtCategoryIdDS);
 
-                final EditText question = (EditText) promptsView
+                final EditText question = promptsView
                         .findViewById(R.id.edtQuestion);
 
-                final EditText questionAnswerA = (EditText) promptsView
+                final EditText questionAnswerA = promptsView
                         .findViewById(R.id.edtAnswerA);
 
-                final EditText questionAnswerB = (EditText) promptsView
+                final EditText questionAnswerB = promptsView
                         .findViewById(R.id.edtAnswerB);
 
-                final EditText questionAnswerC = (EditText) promptsView
+                final EditText questionAnswerC = promptsView
                         .findViewById(R.id.edtAnswerC);
 
-                final EditText questionAnswerD = (EditText) promptsView
+                final EditText questionAnswerD = promptsView
                         .findViewById(R.id.edtAnswerD);
 
-                final EditText correctAnswer = (EditText) promptsView
+                final EditText correctAnswer = promptsView
                         .findViewById(R.id.edtCorrAnswer);
 
-                final RadioButton isImageQuestionTrue = (RadioButton) promptsView
+                final RadioButton isImageQuestionTrue = promptsView
                         .findViewById(R.id.edtIsImageQuestionTrue);
 
                 // set dialog message

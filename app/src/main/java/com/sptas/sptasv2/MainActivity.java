@@ -2,6 +2,7 @@ package com.sptas.sptasv2;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         users = database.getReference("Users");
 
-        edtUser = (MaterialEditText) findViewById(R.id.edtUser);
-        edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
+        edtUser = findViewById(R.id.edtUser);
+        edtPassword = findViewById(R.id.edtPassword);
 
-        btnSignIn = (Button) findViewById(R.id.btn_sign_in);
-        btnSignUp = (Button) findViewById(R.id.btn_sign_up);
+        btnSignIn = findViewById(R.id.btn_sign_in);
+        btnSignUp = findViewById(R.id.btn_sign_up);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calender.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
@@ -122,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         View sign_up_layout = inflater.inflate(R.layout.student_sign_up_layout, null);
 
-        edtNewUser = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewUserName);
-        edtNewPassword = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewPassword);
-        edtNewEmail = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewEmail);
-        edtNewNoPhone = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewNoPhone);
-        edtNewYear = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewYear);
-        edtNewSV = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewSV);
+        edtNewUser = sign_up_layout.findViewById(R.id.edtNewUserName);
+        edtNewPassword = sign_up_layout.findViewById(R.id.edtNewPassword);
+        edtNewEmail = sign_up_layout.findViewById(R.id.edtNewEmail);
+        edtNewNoPhone = sign_up_layout.findViewById(R.id.edtNewNoPhone);
+        edtNewYear = sign_up_layout.findViewById(R.id.edtNewYear);
+        edtNewSV = sign_up_layout.findViewById(R.id.edtNewSV);
 
         alertDialog.setView(sign_up_layout);
         alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);

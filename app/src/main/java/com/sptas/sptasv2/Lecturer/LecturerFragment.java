@@ -45,12 +45,12 @@ public class LecturerFragment extends Fragment {
 
     private void loadStudentProfile() {
 
-        txt_score = (TextView) myFragment.findViewById(R.id.txt_score);
-        txt_name = (TextView) myFragment.findViewById(R.id.txt_name);
-        txt_email = (TextView) myFragment.findViewById(R.id.txt_email);
-        txt_phone = (TextView) myFragment.findViewById(R.id.txt_phone);
-        txt_class = (TextView) myFragment.findViewById(R.id.txt_class);
-        txt_sv = (TextView) myFragment.findViewById(R.id.txt_sv);
+        txt_score = myFragment.findViewById(R.id.txt_score);
+        txt_name = myFragment.findViewById(R.id.txt_name);
+        txt_email = myFragment.findViewById(R.id.txt_email);
+        txt_phone = myFragment.findViewById(R.id.txt_phone);
+        txt_class = myFragment.findViewById(R.id.txt_class);
+        txt_sv = myFragment.findViewById(R.id.txt_sv);
 
 
         txt_name.setText(Common.currentUser.getUserName().toUpperCase());

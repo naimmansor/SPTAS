@@ -53,7 +53,7 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragment = inflater.inflate(R.layout.student_fragment_category, container, false);
 
-        listCategory = (RecyclerView) myFragment.findViewById(R.id.listCategory);
+        listCategory = myFragment.findViewById(R.id.listCategory);
         listCategory.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(container.getContext());
         listCategory.setLayoutManager(layoutManager);

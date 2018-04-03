@@ -18,9 +18,9 @@ public class LecturerViewHolder extends RecyclerView.ViewHolder {
     public LecturerViewHolder(View itemView) {
         super(itemView);
 
-        txt_name = (TextView) itemView.findViewById(R.id.txt_name);
-        txt_email = (TextView) itemView.findViewById(R.id.txt_email);
-        txt_phone = (TextView) itemView.findViewById(R.id.txt_phone);
+        txt_name = itemView.findViewById(R.id.txt_name);
+        txt_email = itemView.findViewById(R.id.txt_email);
+        txt_phone = itemView.findViewById(R.id.txt_phone);
 
     }
 }

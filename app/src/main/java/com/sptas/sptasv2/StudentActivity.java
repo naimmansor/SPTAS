@@ -48,7 +48,7 @@ public class StudentActivity extends AppCompatActivity {
 
         registrationNotification();
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView = findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

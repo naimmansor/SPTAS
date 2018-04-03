@@ -32,10 +32,10 @@ public class Done extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         question_score = database.getReference("Question_Score");
 
-        txtResultScore = (TextView) findViewById(R.id.txtTotalScore);
-        getTxtResultQuestion = (TextView) findViewById(R.id.txtTotalQuestion);
-        progressBar = (ProgressBar) findViewById(R.id.doneProgressBar);
-        btnTryAgain = (Button) findViewById(R.id.btnTryAgain);
+        txtResultScore = findViewById(R.id.txtTotalScore);
+        getTxtResultQuestion = findViewById(R.id.txtTotalQuestion);
+        progressBar = findViewById(R.id.doneProgressBar);
+        btnTryAgain = findViewById(R.id.btnTryAgain);
 
         btnTryAgain.setOnClickListener(new View.OnClickListener() {
             @Override

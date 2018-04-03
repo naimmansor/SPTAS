@@ -31,7 +31,6 @@ public class QuestionList extends ArrayAdapter<Question> {
     DatabaseReference databaseReference;
     EditText edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer;
     RadioGroup edtCategoryId, edtIsImageQuestion;
-    ;
     private Activity context;
     private List<Question> questions;
 
@@ -56,10 +55,10 @@ public class QuestionList extends ArrayAdapter<Question> {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.lecturer_question_bank_layout, null, true);
 
-        TextView categoryId = (TextView) listViewItem.findViewById(R.id.categoryId);
-        Button btnDelete = (Button) listViewItem.findViewById(R.id.btnDelete);
-        Button btnUpdate = (Button) listViewItem.findViewById(R.id.btnUpdate);
-        Button btnView = (Button) listViewItem.findViewById(R.id.btnView);
+        TextView categoryId = listViewItem.findViewById(R.id.categoryId);
+        Button btnDelete = listViewItem.findViewById(R.id.btnDelete);
+        Button btnUpdate = listViewItem.findViewById(R.id.btnUpdate);
+        Button btnView = listViewItem.findViewById(R.id.btnView);
 
         final Question question = questions.get(pos);
         if (question.getCategoryId().equals("01")) {
@@ -87,34 +86,34 @@ public class QuestionList extends ArrayAdapter<Question> {
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-                final RadioGroup categoryId = (RadioGroup) promptsView
+                final RadioGroup categoryId = promptsView
                         .findViewById(R.id.edtCategoryId);
 
-                final RadioButton categoryIdDS = (RadioButton) promptsView
+                final RadioButton categoryIdDS = promptsView
                         .findViewById(R.id.edtCategoryIdDS);
 
-                final EditText txtquestion = (EditText) promptsView
+                final EditText txtquestion = promptsView
                         .findViewById(R.id.edtQuestion);
 
-                final EditText questionAnswerA = (EditText) promptsView
+                final EditText questionAnswerA = promptsView
                         .findViewById(R.id.edtAnswerA);
 
-                final EditText questionAnswerB = (EditText) promptsView
+                final EditText questionAnswerB = promptsView
                         .findViewById(R.id.edtAnswerB);
 
-                final EditText questionAnswerC = (EditText) promptsView
+                final EditText questionAnswerC = promptsView
                         .findViewById(R.id.edtAnswerC);
 
-                final EditText questionAnswerD = (EditText) promptsView
+                final EditText questionAnswerD = promptsView
                         .findViewById(R.id.edtAnswerD);
 
-                final EditText correctAnswer = (EditText) promptsView
+                final EditText correctAnswer = promptsView
                         .findViewById(R.id.edtCorrAnswer);
 
-                final RadioGroup isImageQuestion = (RadioGroup) promptsView
+                final RadioGroup isImageQuestion = promptsView
                         .findViewById(R.id.edtIsImageQuestion);
 
-                final RadioButton isImageQuestionTrue = (RadioButton) promptsView
+                final RadioButton isImageQuestionTrue = promptsView
                         .findViewById(R.id.edtIsImageQuestionTrue);
 
                 if (question.getCategoryId().equals("02")) {
@@ -211,28 +210,28 @@ public class QuestionList extends ArrayAdapter<Question> {
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-                final TextView categoryId = (TextView) promptsView
+                final TextView categoryId = promptsView
                         .findViewById(R.id.categoryId);
 
-                final TextView txtQuestion = (TextView) promptsView
+                final TextView txtQuestion = promptsView
                         .findViewById(R.id.txtQuestion);
 
-                final TextView txtAnswerA = (TextView) promptsView
+                final TextView txtAnswerA = promptsView
                         .findViewById(R.id.txtAnswerA);
 
-                final TextView txtAnswerB = (TextView) promptsView
+                final TextView txtAnswerB = promptsView
                         .findViewById(R.id.txtAnswerB);
 
-                final TextView txtAnswerC = (TextView) promptsView
+                final TextView txtAnswerC = promptsView
                         .findViewById(R.id.txtAnswerC);
 
-                final TextView txtAnswerD = (TextView) promptsView
+                final TextView txtAnswerD = promptsView
                         .findViewById(R.id.txtAnswerD);
 
-                final TextView corrAnswer = (TextView) promptsView
+                final TextView corrAnswer = promptsView
                         .findViewById(R.id.corrAnswer);
 
-                final TextView IsImageQuestion = (TextView) promptsView
+                final TextView IsImageQuestion = promptsView
                         .findViewById(R.id.IsImageQuestion);
 
                 categoryId.setText(question.getCategoryId());
