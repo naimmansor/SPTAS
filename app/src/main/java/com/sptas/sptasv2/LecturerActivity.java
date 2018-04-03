@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.sptas.sptasv2.Lecturer.LecturerFragment;
 import com.sptas.sptasv2.Lecturer.QuestionBank;
-import com.sptas.sptasv2.Student.RankingFragment;
+import com.sptas.sptasv2.Lecturer.StatisticFragment;
 
 /**
  * Created by Na'im Mansor on 05-Mar-18.
@@ -32,14 +32,14 @@ public class LecturerActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
-                    case R.id.action_studentProfile:
+                    case R.id.action_lecturerProfile:
                         selectedFragment = LecturerFragment.newInstance();
                         break;
-                    case R.id.action_category:
+                    case R.id.action_questionBank:
                         selectedFragment = QuestionBank.newInstance();
                         break;
-                    case R.id.action_ranking:
-                        selectedFragment = RankingFragment.newInstance();
+                    case R.id.action_statistic:
+                        selectedFragment = StatisticFragment.newInstance();
                         break;
                 }
 

@@ -37,7 +37,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Lecturer.QuestionBank"></activity>
+        <activity android:name=".Lecturer.QuestionBank" />
+        <activity android:name=".Lecturer.StatisticFragment"></activity>
     </application>
 
 </manifest>
