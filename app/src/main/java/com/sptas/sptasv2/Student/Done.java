@@ -46,6 +46,7 @@ public class Done extends AppCompatActivity {
             }
         });
 
+
         //Get data from bundle and set to view
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
