@@ -10,16 +10,20 @@ public class QuestionScore {
     private String Score;
     private String CategoryId;
     private String CategoryName;
+    private String ChapterId;
+    private String ChapterName;
 
     public QuestionScore() {
     }
 
-    public QuestionScore(String question_Score, String user, String score, String categoryId, String categoryName) {
+    public QuestionScore(String question_Score, String user, String score, String categoryId, String categoryName, String chapterId, String chapterName) {
         Question_Score = question_Score;
         User = user;
         Score = score;
         CategoryId = categoryId;
         CategoryName = categoryName;
+        ChapterId = chapterId;
+        ChapterName = chapterName;
     }
 
     public String getQuestion_Score() {
@@ -60,5 +64,21 @@ public class QuestionScore {
 
     public void setCategoryName(String categoryName) {
         CategoryName = categoryName;
+    }
+
+    public String getChapterId() {
+        return ChapterId;
+    }
+
+    public void setChapterId(String chapterId) {
+        ChapterId = chapterId;
+    }
+
+    public String getChapterName() {
+        return ChapterName;
+    }
+
+    public void setChapterName(String chapterName) {
+        ChapterName = chapterName;
     }
 }

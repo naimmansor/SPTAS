@@ -81,10 +81,18 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Toast.makeText(getActivity(), String.format("%d|%s", adapter.getRef(position).getKey(), model.getName()), Toast.LENGTH_SHORT).show();
-                        Intent startGame = new Intent(getActivity(), Start.class);
-                        Common.categoryId = adapter.getRef(position).getKey();
-                        Common.categoryName = model.getName();
-                        startActivity(startGame);
+                        if (model.getName().equals("Data Structure")) {
+                            Intent startChapter = new Intent(getActivity(), ChapterDetail.class);
+                            Common.categoryId = adapter.getRef(position).getKey();
+                            Common.categoryName = model.getName();
+                            startActivity(startChapter);
+                        } else if (model.getName().equals("Software Engineering")) {
+                            Intent startChapter = new Intent(getActivity(), Start.class);
+                            Common.categoryId = adapter.getRef(position).getKey();
+                            Common.chapterId = model.getChapterId();
+                            Common.categoryName = model.getName();
+                            startActivity(startChapter);
+                        }
 
                     }
                 });

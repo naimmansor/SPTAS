@@ -7,13 +7,15 @@ package com.sptas.sptasv2.Model;
 public class Category {
     private String Name;
     private String Image;
+    private String chapterId;
 
     public Category() {
     }
 
-    public Category(String name, String image) {
+    public Category(String name, String image, String chapterId) {
         Name = name;
         Image = image;
+        this.chapterId = chapterId;
     }
 
     public String getName() {
@@ -30,5 +32,13 @@ public class Category {
 
     public void setImage(String image) {
         Image = image;
+    }
+
+    public String getChapterId() {
+        return chapterId;
+    }
+
+    public void setChapterId(String chapterId) {
+        this.chapterId = chapterId;
     }
 }

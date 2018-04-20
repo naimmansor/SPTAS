@@ -137,7 +137,7 @@ public class QuestionBank extends Fragment {
 
                                         //save
                                         String uid = databaseReference.push().getKey();
-                                        Question test = new Question(uid, questionName, answerA, answerB, answerC, answerD, corrAnswer, cid, image);
+                                        Question test = new Question(uid, questionName, answerA, answerB, answerC, answerD, corrAnswer, cid, "", image);
                                         databaseReference.child(uid).setValue(test);
 
                                         Toast.makeText(getActivity(), "Question Created Successfully!", Toast.LENGTH_SHORT).show();

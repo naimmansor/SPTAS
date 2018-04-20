@@ -32,7 +32,7 @@ public class Start extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         questions = database.getReference("Questions");
 
-        loadQuestion(Common.categoryId);
+        loadQuestion(Common.chapterId);
 
         btnPlay = findViewById(R.id.btnPlay);
 
@@ -46,27 +46,45 @@ public class Start extends AppCompatActivity {
         });
     }
 
-    private void loadQuestion(String categoryId) {
+    private void loadQuestion(String chapterId) {
 
         // First, clear list if have old question
         if (Common.questionList.size() > 0)
             Common.questionList.clear();
 
-        questions.orderByChild("categoryId").equalTo(categoryId)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            Question ques = postSnapshot.getValue(Question.class);
-                            Common.questionList.add(ques);
+        if (Common.categoryName.equals("Data Structure")) {
+            questions.orderByChild("chapterId").equalTo(chapterId)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                Question ques = postSnapshot.getValue(Question.class);
+                                Common.questionList.add(ques);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
+        } else if (Common.categoryName.equals("Software Engineering")) {
+            questions.orderByChild("chapterId").equalTo(chapterId)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                Question ques = postSnapshot.getValue(Question.class);
+                                Common.questionList.add(ques);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+        }
         // Random list
         Collections.shuffle(Common.questionList);
     }

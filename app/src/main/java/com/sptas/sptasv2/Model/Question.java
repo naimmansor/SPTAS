@@ -5,12 +5,12 @@ package com.sptas.sptasv2.Model;
  */
 
 public class Question {
-    private String id, Question, AnswerA, AnswerB, AnswerC, AnswerD, CorrectAnswer, CategoryId, IsImageQuestion;
+    private String id, Question, AnswerA, AnswerB, AnswerC, AnswerD, CorrectAnswer, CategoryId, ChapterId, IsImageQuestion;
 
     public Question() {
     }
 
-    public Question(String id, String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String CategoryId, String isImageQuestion) {
+    public Question(String id, String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String categoryId, String chapterId, String isImageQuestion) {
         this.id = id;
         Question = question;
         AnswerA = answerA;
@@ -18,7 +18,8 @@ public class Question {
         AnswerC = answerC;
         AnswerD = answerD;
         CorrectAnswer = correctAnswer;
-        this.CategoryId = CategoryId;
+        CategoryId = categoryId;
+        ChapterId = chapterId;
         IsImageQuestion = isImageQuestion;
     }
 
@@ -79,11 +80,19 @@ public class Question {
     }
 
     public String getCategoryId() {
-        return this.CategoryId;
+        return CategoryId;
     }
 
-    public void setCategoryId(String CategoryId) {
-        this.CategoryId = CategoryId;
+    public void setCategoryId(String categoryId) {
+        CategoryId = categoryId;
+    }
+
+    public String getChapterId() {
+        return ChapterId;
+    }
+
+    public void setChapterId(String chapterId) {
+        ChapterId = chapterId;
     }
 
     public String getIsImageQuestion() {
