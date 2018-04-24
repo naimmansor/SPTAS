@@ -11,20 +11,20 @@ public class User {
     private String email;
     private String noPhone;
     private String year;
-    private String sv;
+    private String nickName;
 
 
     public User() {
     }
 
-    public User(String userType, String userName, String password, String email, String noPhone, String year, String sv) {
+    public User(String userType, String userName, String password, String email, String noPhone, String year, String nickName) {
         this.userType = userType;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.noPhone = noPhone;
         this.year = year;
-        this.sv = sv;
+        this.nickName = nickName;
     }
 
     public String getUserType() {
@@ -75,11 +75,11 @@ public class User {
         this.year = year;
     }
 
-    public String getSv() {
-        return sv;
+    public String getnickName() {
+        return nickName;
     }
 
-    public void setSv(String sv) {
-        this.sv = sv;
+    public void setnickName(String nickName) {
+        this.nickName = nickName;
     }
 }

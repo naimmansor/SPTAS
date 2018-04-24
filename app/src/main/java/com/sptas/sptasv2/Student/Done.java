@@ -18,11 +18,13 @@ import com.sptas.sptasv2.StudentActivity;
 public class Done extends AppCompatActivity {
 
     Button btnTryAgain;
-    TextView txtResultScore, getTxtResultQuestion;
+    TextView txtResultScore, getTxtResultQuestion, done_text;
     ProgressBar progressBar;
 
     FirebaseDatabase database;
     DatabaseReference question_score;
+
+    float total_percentage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class Done extends AppCompatActivity {
         getTxtResultQuestion = findViewById(R.id.txtTotalQuestion);
         progressBar = findViewById(R.id.doneProgressBar);
         btnTryAgain = findViewById(R.id.btnTryAgain);
+        done_text = findViewById(R.id.done_text);
 
         btnTryAgain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,15 +60,25 @@ public class Done extends AppCompatActivity {
             txtResultScore.setText(String.format("SCORE : %d", score));
             getTxtResultQuestion.setText(String.format("PASSED : %d / %d", correctAnswer, totalQuestion));
 
+            total_percentage += ((correctAnswer * 100) / totalQuestion);
+
+            if (total_percentage >= 80) {
+                done_text.setText("Congratulations, you really understand the chapter and should teach others!");
+            } else if (total_percentage < 80 && total_percentage >= 50) {
+                done_text.setText("Well done, you already understand the chapter!");
+            } else if (total_percentage <= 49) {
+                done_text.setText("Good Try, but you need try harder!");
+            }
+
             progressBar.setMax(totalQuestion);
             progressBar.setProgress(correctAnswer);
 
             //Upload point to DB
-            question_score.child(String.format("%s_%s", Common.currentUser.getUserName(),
-                    Common.categoryId))
+            question_score.child(String.format("%s_%s", Common.currentUser.getnickName(),
+                    Common.chapterId))
                     .setValue(new QuestionScore(String.format("%s_%s", Common.currentUser.getUserName(),
                             Common.categoryId),
-                            Common.currentUser.getUserName(),
+                            Common.currentUser.getnickName(),
                             String.valueOf(score),
                             Common.categoryId,
                             Common.categoryName,

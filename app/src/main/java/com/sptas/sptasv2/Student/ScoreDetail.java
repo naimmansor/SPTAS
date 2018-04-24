@@ -54,7 +54,7 @@ public class ScoreDetail extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(ScoreDetailViewHolder viewHolder, QuestionScore model, int position) {
-                viewHolder.txt_name.setText(model.getCategoryName());
+                viewHolder.txt_name.setText(model.getChapterName());
                 viewHolder.txt_score.setText(model.getScore());
             }
         };

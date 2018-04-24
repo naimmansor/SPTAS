@@ -82,10 +82,10 @@
             app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtNewSV"
+            android:id="@+id/edtNewNickName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Supervisor"
+            android:hint="Nick Name"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"

@@ -71,7 +71,7 @@ public class RankingFragment extends Fragment {
         rankingList.setLayoutManager(layoutManager);
 
         // Now, we need implement callback
-        updateScore(Common.currentUser.getUserName(), new RankingCallBack<Ranking>() {
+        updateScore(Common.currentUser.getnickName(), new RankingCallBack<Ranking>() {
             @Override
             public void callBack(Ranking ranking) {
                 // Update to Ranking table
@@ -91,7 +91,12 @@ public class RankingFragment extends Fragment {
             @Override
             protected void populateViewHolder(RankingViewHolder viewHolder, final Ranking model, int position) {
 
-                viewHolder.txt_name.setText(model.getUserName());
+                if (model.getUserName().equals(Common.currentUser.getnickName())) {
+                    viewHolder.txt_name.setText("You");
+                } else {
+                    viewHolder.txt_name.setText(model.getUserName());
+                }
+
                 viewHolder.txt_score.setText(String.valueOf(model.getScore()));
 
                 //Fixed crash when click to item

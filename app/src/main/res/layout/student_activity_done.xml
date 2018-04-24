@@ -6,6 +6,20 @@
     android:background="@drawable/bg_vertical"
     tools:context="com.sptas.sptasv2.Student.Done">
 
+
+    <TextView
+        android:id="@+id/done_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

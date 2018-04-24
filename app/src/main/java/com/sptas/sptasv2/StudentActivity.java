@@ -116,7 +116,7 @@ public class StudentActivity extends AppCompatActivity {
 
     private void setDefaultFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, StudentFragment.newInstance());
+        transaction.replace(R.id.frame_layout, CategoryFragment.newInstance());
         transaction.commit();
     }
 }

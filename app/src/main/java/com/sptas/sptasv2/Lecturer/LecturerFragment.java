@@ -15,7 +15,7 @@ import com.sptas.sptasv2.R;
 public class LecturerFragment extends Fragment {
 
     View myFragment;
-    TextView txt_name, txt_email, txt_phone, txt_class, txt_sv, txt_score;
+    TextView txt_name, txt_email, txt_phone, txt_class, txt_nickName, txt_score;
 
     FirebaseDatabase database;
 
@@ -50,14 +50,14 @@ public class LecturerFragment extends Fragment {
         txt_email = myFragment.findViewById(R.id.txt_email);
         txt_phone = myFragment.findViewById(R.id.txt_phone);
         txt_class = myFragment.findViewById(R.id.txt_class);
-        txt_sv = myFragment.findViewById(R.id.txt_sv);
+        txt_nickName = myFragment.findViewById(R.id.txt_nickName);
 
 
         txt_name.setText(Common.currentUser.getUserName().toUpperCase());
         txt_email.setText(Common.currentUser.getEmail());
         txt_phone.setText(Common.currentUser.getNoPhone());
         txt_class.setText(Common.currentUser.getYear());
-        txt_sv.setText(Common.currentUser.getSv());
+        txt_nickName.setText(Common.currentUser.getnickName());
 
     }
 

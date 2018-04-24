@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.R;
@@ -17,7 +18,7 @@ import com.squareup.picasso.Picasso;
 public class Playing extends AppCompatActivity implements View.OnClickListener {
 
     final static long INTERVAL = 1000; // 1 sec
-    final static long TIMEOUT = 7000; // 7 sec
+    final static long TIMEOUT = 20000; // 20 sec
     int progressValue = 0;
 
     CountDownTimer mCountDown;
@@ -27,7 +28,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener {
 
     ProgressBar progressBar;
     ImageView question_image;
-    Button btnA, btnB, btnC, btnD;
+    Button btnA, btnB, btnC, btnD, btnNext;
     TextView txtScore, txtQuestionNum, question_text;
 
     @Override
@@ -66,17 +67,12 @@ public class Playing extends AppCompatActivity implements View.OnClickListener {
                 // Choose correct answer
                 score += 10;
                 correctAnswer++;
-                showQuestion(++index); // next question
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+                showQuestion(++index); //next question
             } else {
                 //Choose wrong answer
-                Intent intent = new Intent(this, Done.class);
-                Bundle dataSend = new Bundle();
-                dataSend.putInt("SCORE", score);
-                dataSend.putInt("TOTAL", totalQuestion);
-                dataSend.putInt("CORRECT", correctAnswer);
-                intent.putExtras(dataSend);
-                startActivity(intent);
-                finish();
+                Toast.makeText(this, "Wrong, Answer is " + Common.questionList.get(index).getCorrectAnswer() + " !", Toast.LENGTH_SHORT).show();
+                showQuestion(++index); //next question
             }
 
             txtScore.setText(String.format("%d", score));
@@ -108,8 +104,15 @@ public class Playing extends AppCompatActivity implements View.OnClickListener {
 
             btnA.setText(Common.questionList.get(index).getAnswerA());
             btnB.setText(Common.questionList.get(index).getAnswerB());
-            btnC.setText(Common.questionList.get(index).getAnswerC());
-            btnD.setText(Common.questionList.get(index).getAnswerD());
+
+            //condition for button C and D
+            if (Common.questionList.get(index).getAnswerC().equals("null")) {
+                btnC.setVisibility(View.INVISIBLE);
+                btnD.setVisibility(View.INVISIBLE);
+            } else {
+                btnC.setText(Common.questionList.get(index).getAnswerC());
+                btnD.setText(Common.questionList.get(index).getAnswerD());
+            }
 
             mCountDown.start(); // Start Timer
         } else {
@@ -144,6 +147,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onFinish() {
                 mCountDown.cancel();
+                Toast.makeText(Playing.this, "You should Answer the Question!", Toast.LENGTH_SHORT).show();
                 showQuestion(++index);
             }
         };
