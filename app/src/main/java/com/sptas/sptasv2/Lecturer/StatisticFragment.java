@@ -1,5 +1,6 @@
 package com.sptas.sptasv2.Lecturer;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,26 +10,32 @@ import android.view.ViewGroup;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.sptas.sptasv2.Model.Ranking;
+import com.google.firebase.database.ValueEventListener;
+import com.sptas.sptasv2.Model.StatisticScore;
 import com.sptas.sptasv2.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class StatisticFragment extends Fragment {
 
+    final List<String> statisticName = new ArrayList<>();
+    final List<Long> statisticListScore = new ArrayList<>();
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
     View myFragment;
     HorizontalBarChart mChart;
-
-    DatabaseReference database;
-
-    Ranking ranking;
-
+    StatisticScore statisticScore;
+    DatabaseReference ref = database.getReference("Ranking");
 
     public static StatisticFragment newInstance() {
         StatisticFragment statisticFragment = new StatisticFragment();
@@ -38,10 +45,6 @@ public class StatisticFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        database = FirebaseDatabase.getInstance().getReference("Ranking");
-
-        // database.child("score").child(String.valueOf(ranking.getScore()));
     }
 
     @Nullable
@@ -49,76 +52,61 @@ public class StatisticFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragment = inflater.inflate(R.layout.lecturer_fragment_statistic, container, false);
 
-        mChart = (HorizontalBarChart) myFragment.findViewById(R.id.chart);
-
-        setData(12, 50);
+        showStatistic();
 
         return myFragment;
     }
 
-    private void setData(int count, int range) {
+    private void showStatistic() {
+        // Attach a listener to read the data at our posts reference
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    statisticScore = snapshot.getValue(StatisticScore.class);
 
-        ArrayList<BarEntry> yVals = new ArrayList<>();
-        float barWidth = 9f;
-        float spaceForBar = 10f;
+                    statisticName.add(statisticScore.getUserName());
+                    statisticListScore.add(statisticScore.getScore());
+                }
 
-        mChart.animateY(1000, Easing.EasingOption.EaseInElastic);
+                mChart = (HorizontalBarChart) myFragment.findViewById(R.id.chart);
 
-        for (int i = 0; i < count; i++) {
-            float val = (float) (Math.random() * range);
-            yVals.add(new BarEntry(i * spaceForBar, val));
+                XAxis xAxis = mChart.getXAxis();
+                xAxis.setGranularity(1f);
+                xAxis.setGranularityEnabled(true);
 
-            /*float val = (float) (Integer.parseInt(questionScore.getScore())*range);
-            yVals.add(new BarEntry(i*spaceForBar, val));*/
-        }
+                ArrayList<BarEntry> yValues = new ArrayList<>();
+                //float barWidth = 9f;
+                //float  spaceForBar = 10f;
 
-        BarDataSet set1;
+                for (int i = 0; i < statisticName.size(); i++) {
+                    yValues.add(new BarEntry(i, statisticListScore.get(i)));
+                }
 
-        set1 = new BarDataSet(yVals, "Score for the Student");
+                mChart.animateY(1000, Easing.EasingOption.EaseInOutElastic);
 
-        BarData data = new BarData(set1);
-        data.setBarWidth(barWidth);
+                BarDataSet barDataSet = new BarDataSet(yValues, "Data Score");
+                barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
-        mChart.setData(data);
+                BarData data = new BarData(barDataSet);
+                //data.setBarWidth(barWidth);
+                data.setValueTextSize(13f);
+                data.setValueTextColor(Color.MAGENTA);
 
+                //mChart.getXAxis().setValueFormatter(new LabelFormatter(xValues));
+                mChart.setData((data));
+                mChart.invalidate();
+
+                System.out.println("User Name : " + statisticName);
+                System.out.println("Score : " + statisticListScore);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
-
 }
 
 
-//example for pie chart
-
-     /*pieChart = (PieChart) myFragment.findViewById(R.id.piechart);
-
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-
-        pieChart.setDragDecelerationFrictionCoef(0.95f); //spin of pieChart
-
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(60f);
-
-        ArrayList<PieEntry> yValues = new ArrayList();
-
-        yValues.add(new PieEntry(34f, "Bangladesh"));
-        yValues.add(new PieEntry(23f, "USA"));
-        yValues.add(new PieEntry(14f, "UK"));
-        yValues.add(new PieEntry(35f, "India"));
-        yValues.add(new PieEntry(40f, "Russia"));
-        yValues.add(new PieEntry(23f, "Japan"));
-
-        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-
-        PieDataSet dataSet = new PieDataSet(yValues, "Countries");
-        dataSet.setValueTextColor(Color.WHITE);
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-
-        PieData data = new PieData(dataSet);
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.BLACK);
-
-        pieChart.setData(data); */
