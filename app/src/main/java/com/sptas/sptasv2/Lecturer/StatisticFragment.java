@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -31,13 +31,24 @@ import java.util.List;
 
 public class StatisticFragment extends Fragment {
 
-    final List<String> statisticName = new ArrayList<>();
-    final List<Long> statisticListScore = new ArrayList<>();
-
+    final List<String> statisticNameSTF = new ArrayList<>();
+    final List<Long> statisticListScoreSTF = new ArrayList<>();
+    final List<String> statisticNameSMC = new ArrayList<>();
+    final List<Long> statisticListScoreSMC = new ArrayList<>();
+    final List<String> statisticNameLTF = new ArrayList<>();
+    final List<Long> statisticListScoreLTF = new ArrayList<>();
+    final List<String> statisticNameLMC = new ArrayList<>();
+    final List<Long> statisticListScoreLMC = new ArrayList<>();
+    final List<String> statisticNameStack = new ArrayList<>();
+    final List<Long> statisticListScoreStack = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+    String ChapterNameSTF = "";
+    String ChapterNameSMC = "";
+    String ChapterNameLTF = "";
+    String ChapterNameLMC = "";
+    String ChapterNameStack = "";
     View myFragment;
-    HorizontalBarChart mChart;
+    BarChart stfChart, smcChart, ltfChart, lmcChart, stackChart;
 
     StatisticScore statisticScore;
     DatabaseReference ref = database.getReference("Question_Score");
@@ -64,53 +75,178 @@ public class StatisticFragment extends Fragment {
 
     private void showStatistic() {
         // Attach a listener to read the data at our posts reference
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    statisticScore = snapshot.getValue(StatisticScore.class);
+        ref.orderByChild("chapterId")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            statisticScore = snapshot.getValue(StatisticScore.class);
 
-                    statisticName.add(statisticScore.getUserName());
-                    statisticListScore.add(Long.parseLong(statisticScore.getScore()));
-                }
+                            if (statisticScore.getChapterId().equals("ds07")) {
+                                ChapterNameSTF = statisticScore.getChapterName();
+                                statisticNameSTF.add(statisticScore.getUserName());
+                                statisticListScoreSTF.add(Long.parseLong(statisticScore.getScore()));
+                            } else if (statisticScore.getChapterId().equals("ds08")) {
 
-                mChart = (HorizontalBarChart) myFragment.findViewById(R.id.chart);
+                                ChapterNameSMC = statisticScore.getChapterName();
+                                statisticNameSMC.add(statisticScore.getUserName());
+                                statisticListScoreSMC.add(Long.parseLong(statisticScore.getScore()));
+                            } else if (statisticScore.getChapterId().equals("ds09")) {
 
-                XAxis xAxis = mChart.getXAxis();
-                xAxis.setGranularity(1f);
-                xAxis.setGranularityEnabled(true);
+                                ChapterNameLTF = statisticScore.getChapterName();
+                                statisticNameLTF.add(statisticScore.getUserName());
+                                statisticListScoreLTF.add(Long.parseLong(statisticScore.getScore()));
+                            } else if (statisticScore.getChapterId().equals("ds10")) {
 
-                ArrayList<BarEntry> yValues = new ArrayList<>();
-                //float barWidth = 9f;
-                //float  spaceForBar = 10f;
+                                ChapterNameLMC = statisticScore.getChapterName();
+                                statisticNameLMC.add(statisticScore.getUserName());
+                                statisticListScoreLMC.add(Long.parseLong(statisticScore.getScore()));
+                            } else if (statisticScore.getChapterId().equals("ds12")) {
 
-                for (int i = 0; i < statisticName.size(); i++) {
-                    yValues.add(new BarEntry(i, statisticListScore.get(i)));
-                }
+                                ChapterNameStack = statisticScore.getChapterName();
+                                statisticNameStack.add(statisticScore.getUserName());
+                                statisticListScoreStack.add(Long.parseLong(statisticScore.getScore()));
+                            }
 
-                mChart.animateY(1000, Easing.EasingOption.EaseInOutElastic);
 
-                BarDataSet barDataSet = new BarDataSet(yValues, "Data Score");
-                barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                        }
 
-                BarData data = new BarData(barDataSet);
-                //data.setBarWidth(barWidth);
-                data.setValueTextSize(13f);
-                data.setValueTextColor(Color.MAGENTA);
+                        // graph statistic for Searching T/F
+                        stfChart = (BarChart) myFragment.findViewById(R.id.searchingTFchart);
 
-                mChart.getXAxis().setValueFormatter(new LabelFormatter(statisticName));
-                mChart.setData((data));
-                mChart.invalidate();
+                        XAxis xAxisSTF = stfChart.getXAxis();
+                        xAxisSTF.setGranularity(1f);
+                        xAxisSTF.setGranularityEnabled(true);
 
-                System.out.println("User Name : " + statisticName);
-                System.out.println("Score : " + statisticListScore);
-            }
+                        ArrayList<BarEntry> yValSTF = new ArrayList<>();
+                        //float barWidth = 9f;
+                        //float  spaceForBar = 10f;
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+                        for (int i = 0; i < statisticNameSTF.size(); i++) {
+                            yValSTF.add(new BarEntry(i, statisticListScoreSTF.get(i)));
+                        }
+
+                        stfChart.animateY(1000, Easing.EasingOption.EaseInOutElastic);
+
+                        BarDataSet barDataSetSTF = new BarDataSet(yValSTF, "Score for Chapter : " + ChapterNameSTF);
+                        barDataSetSTF.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                        BarData dataSTF = new BarData(barDataSetSTF);
+                        //data.setBarWidth(barWidth);
+                        dataSTF.setValueTextSize(13f);
+                        dataSTF.setValueTextColor(Color.MAGENTA);
+
+                        stfChart.getXAxis().setValueFormatter(new LabelFormatter(statisticNameSTF));
+                        stfChart.setData((dataSTF));
+                        stfChart.invalidate();
+
+
+                        // graph statistic for Searching MC
+                        smcChart = (BarChart) myFragment.findViewById(R.id.searchingMCchart);
+
+                        ArrayList<BarEntry> yValSMC = new ArrayList<>();
+                        //float barWidth = 9f;
+                        //float  spaceForBar = 10f;
+
+                        for (int i = 0; i < statisticNameSMC.size(); i++) {
+                            yValSMC.add(new BarEntry(i, statisticListScoreSMC.get(i)));
+                        }
+
+                        smcChart.animateY(1000, Easing.EasingOption.EaseInOutElastic);
+
+                        BarDataSet barDataSetSMC = new BarDataSet(yValSMC, "Score for Chapter : " + ChapterNameSMC);
+                        barDataSetSMC.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                        BarData dataSMC = new BarData(barDataSetSMC);
+                        //data.setBarWidth(barWidth);
+                        dataSMC.setValueTextSize(13f);
+                        dataSMC.setValueTextColor(Color.MAGENTA);
+
+                        smcChart.setData((dataSMC));
+                        smcChart.invalidate();
+
+
+                        // graph statistic for Linked List T/F
+                        ltfChart = (BarChart) myFragment.findViewById(R.id.linkListTFchart);
+
+                        ArrayList<BarEntry> yValLTF = new ArrayList<>();
+                        //float barWidth = 9f;
+                        //float  spaceForBar = 10f;
+
+                        for (int i = 0; i < statisticNameLTF.size(); i++) {
+                            yValLTF.add(new BarEntry(i, statisticListScoreLTF.get(i)));
+                        }
+
+                        ltfChart.animateY(1000, Easing.EasingOption.EaseInOutElastic);
+
+                        BarDataSet barDataSetLTF = new BarDataSet(yValLTF, "Score for Chapter : " + ChapterNameLTF);
+                        barDataSetLTF.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                        BarData dataLTF = new BarData(barDataSetLTF);
+                        //data.setBarWidth(barWidth);
+                        dataLTF.setValueTextSize(13f);
+                        dataLTF.setValueTextColor(Color.MAGENTA);
+
+                        ltfChart.setData((dataLTF));
+                        ltfChart.invalidate();
+
+
+                        // graph statistic for Linked List MC
+                        lmcChart = (BarChart) myFragment.findViewById(R.id.linkListMCchart);
+
+                        ArrayList<BarEntry> yValLMC = new ArrayList<>();
+                        //float barWidth = 9f;
+                        //float  spaceForBar = 10f;
+
+                        for (int i = 0; i < statisticNameLMC.size(); i++) {
+                            yValLMC.add(new BarEntry(i, statisticListScoreLMC.get(i)));
+                        }
+
+                        lmcChart.animateY(1000, Easing.EasingOption.EaseInOutElastic);
+
+                        BarDataSet barDataSetLMC = new BarDataSet(yValLMC, "Score for Chapter : " + ChapterNameLMC);
+                        barDataSetLMC.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                        BarData dataLMC = new BarData(barDataSetLMC);
+                        //data.setBarWidth(barWidth);
+                        dataLMC.setValueTextSize(13f);
+                        dataLMC.setValueTextColor(Color.MAGENTA);
+
+                        lmcChart.setData((dataLMC));
+                        lmcChart.invalidate();
+
+
+                        // graph statistic for Stack
+                        stackChart = (BarChart) myFragment.findViewById(R.id.stackMCchart);
+
+                        ArrayList<BarEntry> yValStack = new ArrayList<>();
+                        //float barWidth = 9f;
+                        //float  spaceForBar = 10f;
+
+                        for (int i = 0; i < statisticNameStack.size(); i++) {
+                            yValStack.add(new BarEntry(i, statisticListScoreStack.get(i)));
+                        }
+
+                        stackChart.animateY(1000, Easing.EasingOption.EaseInOutElastic);
+
+                        BarDataSet barDataSetStack = new BarDataSet(yValStack, "Score for Chapter : " + ChapterNameStack);
+                        barDataSetStack.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                        BarData dataStack = new BarData(barDataSetStack);
+                        //data.setBarWidth(barWidth);
+                        dataStack.setValueTextSize(13f);
+                        dataStack.setValueTextColor(Color.MAGENTA);
+
+                        stackChart.setData((dataStack));
+                        stackChart.invalidate();
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("The read failed: " + databaseError.getCode());
+                    }
+                });
     }
 
     private class LabelFormatter implements IAxisValueFormatter {

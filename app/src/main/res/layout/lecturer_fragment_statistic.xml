@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background"
     tools:context=".Lecturer.StatisticFragment">
 
-    <com.github.mikephil.charting.charts.HorizontalBarChart
-        android:id="@+id/chart"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.github.mikephil.charting.charts.HorizontalBarChart>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Start of Student Statistic" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/searchingTFchart"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"></com.github.mikephil.charting.charts.BarChart>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/searchingMCchart"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"></com.github.mikephil.charting.charts.BarChart>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/linkListTFchart"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"></com.github.mikephil.charting.charts.BarChart>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/linkListMCchart"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"></com.github.mikephil.charting.charts.BarChart>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/stackMCchart"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"></com.github.mikephil.charting.charts.BarChart>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="End of Student Statistic View" />
+
+    </LinearLayout>
+</ScrollView>
