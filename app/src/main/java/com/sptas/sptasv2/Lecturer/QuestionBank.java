@@ -2,13 +2,11 @@ package com.sptas.sptasv2.Lecturer;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -26,9 +24,8 @@ import com.sptas.sptasv2.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionBank extends Fragment {
+public class QuestionBank extends AppCompatActivity {
 
-    View myFragment;
     DatabaseReference databaseReference;
     ListView listViewUsers;
     List<Question> questions;
@@ -38,45 +35,35 @@ public class QuestionBank extends Fragment {
 
     private String image, cid = "";
 
-    public static QuestionBank newInstance() {
-        QuestionBank questionBank = new QuestionBank();
-        return questionBank;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        myFragment = inflater.inflate(R.layout.lecturer_activity_question_bank, container, false);
+        setContentView(R.layout.lecturer_activity_question_bank);
 
         questions = new ArrayList<Question>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions");
 
         // components from main.xml
-        btnAdd = myFragment.findViewById(R.id.buttonPrompt);
-        edtCategoryId = myFragment.findViewById(R.id.edtCategoryId);
-        edtQuestion = myFragment.findViewById(R.id.edtQuestion);
-        edtAnswerA = myFragment.findViewById(R.id.edtAnswerA);
-        edtAnswerB = myFragment.findViewById(R.id.edtAnswerB);
-        edtAnswerC = myFragment.findViewById(R.id.edtAnswerC);
-        edtAnswerD = myFragment.findViewById(R.id.edtAnswerD);
-        edtCorrAnswer = myFragment.findViewById(R.id.edtCorrAnswer);
-        edtIsImageQuestion = myFragment.findViewById(R.id.edtIsImageQuestion);
-        listViewUsers = myFragment.findViewById(R.id.listViewUsers);
+        btnAdd = findViewById(R.id.buttonPrompt);
+        edtCategoryId = findViewById(R.id.edtCategoryId);
+        edtQuestion = findViewById(R.id.edtQuestion);
+        edtAnswerA = findViewById(R.id.edtAnswerA);
+        edtAnswerB = findViewById(R.id.edtAnswerB);
+        edtAnswerC = findViewById(R.id.edtAnswerC);
+        edtAnswerD = findViewById(R.id.edtAnswerD);
+        edtCorrAnswer = findViewById(R.id.edtCorrAnswer);
+        edtIsImageQuestion = findViewById(R.id.edtIsImageQuestion);
+        listViewUsers = findViewById(R.id.listViewUsers);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // get prompts.xml view
-                LayoutInflater li = LayoutInflater.from(getContext());
+                LayoutInflater li = LayoutInflater.from(QuestionBank.this);
                 View promptsView = li.inflate(R.layout.lecturer_popup_question, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        getContext());
+                        QuestionBank.this);
 
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
@@ -140,7 +127,7 @@ public class QuestionBank extends Fragment {
                                         Question test = new Question(uid, questionName, answerA, answerB, answerC, answerD, corrAnswer, cid, "", image);
                                         databaseReference.child(uid).setValue(test);
 
-                                        Toast.makeText(getActivity(), "Question Created Successfully!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(QuestionBank.this, "Question Created Successfully!", Toast.LENGTH_SHORT).show();
 
                                         question.setText(null);
                                     }
@@ -159,8 +146,6 @@ public class QuestionBank extends Fragment {
                 alertDialog.show();
             }
         });
-
-        return myFragment;
     }
 
     @Override
@@ -177,7 +162,7 @@ public class QuestionBank extends Fragment {
                     questions.add(question);
                 }
 
-                QuestionList questionAdapter = new QuestionList(getActivity(), questions, databaseReference, edtCategoryId, edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer, edtIsImageQuestion);
+                QuestionList questionAdapter = new QuestionList(QuestionBank.this, questions, databaseReference, edtCategoryId, edtQuestion, edtAnswerA, edtAnswerB, edtAnswerC, edtAnswerD, edtCorrAnswer, edtIsImageQuestion);
                 listViewUsers.setAdapter(questionAdapter);
             }
 

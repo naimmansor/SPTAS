@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.sptas.sptasv2.Lecturer.LecturerFragment;
-import com.sptas.sptasv2.Lecturer.QuestionBank;
 import com.sptas.sptasv2.Lecturer.StatisticFragment;
 
 /**
@@ -36,7 +35,7 @@ public class LecturerActivity extends AppCompatActivity {
                         selectedFragment = LecturerFragment.newInstance();
                         break;
                     case R.id.action_questionBank:
-                        selectedFragment = QuestionBank.newInstance();
+                        selectedFragment = CategoryFragment.newInstance();
                         break;
                     case R.id.action_statistic:
                         selectedFragment = StatisticFragment.newInstance();

@@ -18,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.sptas.sptasv2.Common.Common;
-import com.sptas.sptasv2.Student.CategoryFragment;
 import com.sptas.sptasv2.Student.RankingFragment;
 import com.sptas.sptasv2.Student.StudentFragment;
 

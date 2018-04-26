@@ -1,4 +1,4 @@
-package com.sptas.sptasv2.Student;
+package com.sptas.sptasv2;
 
 
 import android.content.Intent;
@@ -16,8 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Interface.ItemClickListener;
+import com.sptas.sptasv2.Lecturer.QuestionBank;
 import com.sptas.sptasv2.Model.Category;
-import com.sptas.sptasv2.R;
+import com.sptas.sptasv2.Student.ChapterDetail;
+import com.sptas.sptasv2.Student.Start;
 import com.sptas.sptasv2.ViewHolder.CategoryViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -81,19 +83,24 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Toast.makeText(getActivity(), String.format("%d|%s", adapter.getRef(position).getKey(), model.getName()), Toast.LENGTH_SHORT).show();
-                        if (model.getName().equals("Data Structure")) {
-                            Intent startChapter = new Intent(getActivity(), ChapterDetail.class);
-                            Common.categoryId = adapter.getRef(position).getKey();
-                            Common.categoryName = model.getName();
-                            startActivity(startChapter);
-                        } else if (model.getName().equals("Software Engineering")) {
-                            Intent startChapter = new Intent(getActivity(), Start.class);
-                            Common.categoryId = adapter.getRef(position).getKey();
-                            Common.chapterId = model.getChapterId();
-                            Common.categoryName = model.getName();
-                            startActivity(startChapter);
-                        }
 
+                        if (Common.currentUser.getUserType().equals("Lecturer")) {
+                            Intent startChapter = new Intent(getActivity(), QuestionBank.class);
+                            startActivity(startChapter);
+                        } else if (Common.currentUser.getUserType().equals("Student")) {
+                            if (model.getName().equals("Data Structure")) {
+                                Intent startChapter = new Intent(getActivity(), ChapterDetail.class);
+                                Common.categoryId = adapter.getRef(position).getKey();
+                                Common.categoryName = model.getName();
+                                startActivity(startChapter);
+                            } else if (model.getName().equals("Software Engineering")) {
+                                Intent startChapter = new Intent(getActivity(), Start.class);
+                                Common.categoryId = adapter.getRef(position).getKey();
+                                Common.chapterId = model.getChapterId();
+                                Common.categoryName = model.getName();
+                                startActivity(startChapter);
+                            }
+                        }
                     }
                 });
             }
