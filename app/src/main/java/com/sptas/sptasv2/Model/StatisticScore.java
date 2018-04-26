@@ -1,30 +1,90 @@
 package com.sptas.sptasv2.Model;
 
 public class StatisticScore {
-    private String userName;
-    private long score;
+    private String Question_Score;
+    private String User;
+    private String UserName;
+    private String Score;
+    private String CategoryId;
+    private String CategoryName;
+    private String ChapterId;
+    private String ChapterName;
 
     public StatisticScore() {
     }
 
-    public StatisticScore(String userName, long score) {
-        this.userName = userName;
-        this.score = score;
+    public StatisticScore(String question_Score, String user, String userName, String score, String categoryId, String categoryName, String chapterId, String chapterName) {
+        Question_Score = question_Score;
+        User = user;
+        UserName = userName;
+        Score = score;
+        CategoryId = categoryId;
+        CategoryName = categoryName;
+        ChapterId = chapterId;
+        ChapterName = chapterName;
+    }
+
+    public String getQuestion_Score() {
+        return Question_Score;
+    }
+
+    public void setQuestion_Score(String question_Score) {
+        Question_Score = question_Score;
+    }
+
+    public String getUser() {
+        return User;
+    }
+
+    public void setUser(String user) {
+        User = user;
     }
 
     public String getUserName() {
-        return userName;
+        return UserName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        UserName = userName;
     }
 
-    public long getScore() {
-        return score;
+    public String getScore() {
+        return Score;
     }
 
-    public void setScore(long score) {
-        this.score = score;
+    public void setScore(String score) {
+        Score = score;
+    }
+
+    public String getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        CategoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        CategoryName = categoryName;
+    }
+
+    public String getChapterId() {
+        return ChapterId;
+    }
+
+    public void setChapterId(String chapterId) {
+        ChapterId = chapterId;
+    }
+
+    public String getChapterName() {
+        return ChapterName;
+    }
+
+    public void setChapterName(String chapterName) {
+        ChapterName = chapterName;
     }
 }

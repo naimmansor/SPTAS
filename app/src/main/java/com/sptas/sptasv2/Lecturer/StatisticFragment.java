@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,11 +33,14 @@ public class StatisticFragment extends Fragment {
 
     final List<String> statisticName = new ArrayList<>();
     final List<Long> statisticListScore = new ArrayList<>();
+
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
     View myFragment;
     HorizontalBarChart mChart;
+
     StatisticScore statisticScore;
-    DatabaseReference ref = database.getReference("Ranking");
+    DatabaseReference ref = database.getReference("Question_Score");
 
     public static StatisticFragment newInstance() {
         StatisticFragment statisticFragment = new StatisticFragment();
@@ -66,7 +71,7 @@ public class StatisticFragment extends Fragment {
                     statisticScore = snapshot.getValue(StatisticScore.class);
 
                     statisticName.add(statisticScore.getUserName());
-                    statisticListScore.add(statisticScore.getScore());
+                    statisticListScore.add(Long.parseLong(statisticScore.getScore()));
                 }
 
                 mChart = (HorizontalBarChart) myFragment.findViewById(R.id.chart);
@@ -93,7 +98,7 @@ public class StatisticFragment extends Fragment {
                 data.setValueTextSize(13f);
                 data.setValueTextColor(Color.MAGENTA);
 
-                //mChart.getXAxis().setValueFormatter(new LabelFormatter(xValues));
+                mChart.getXAxis().setValueFormatter(new LabelFormatter(statisticName));
                 mChart.setData((data));
                 mChart.invalidate();
 
@@ -106,6 +111,19 @@ public class StatisticFragment extends Fragment {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+    }
+
+    private class LabelFormatter implements IAxisValueFormatter {
+        private final List<String> mLabels;
+
+        public LabelFormatter(List<String> labels) {
+            mLabels = labels;
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            return mLabels.get((int) value);
+        }
     }
 }
 

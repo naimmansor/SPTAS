@@ -7,6 +7,7 @@ package com.sptas.sptasv2.Model;
 public class QuestionScore {
     private String Question_Score;
     private String User;
+    private String UserName;
     private String Score;
     private String CategoryId;
     private String CategoryName;
@@ -16,9 +17,10 @@ public class QuestionScore {
     public QuestionScore() {
     }
 
-    public QuestionScore(String question_Score, String user, String score, String categoryId, String categoryName, String chapterId, String chapterName) {
+    public QuestionScore(String question_Score, String user, String userName, String score, String categoryId, String categoryName, String chapterId, String chapterName) {
         Question_Score = question_Score;
         User = user;
+        UserName = userName;
         Score = score;
         CategoryId = categoryId;
         CategoryName = categoryName;
@@ -40,6 +42,14 @@ public class QuestionScore {
 
     public void setUser(String user) {
         User = user;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
     public String getScore() {
