@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -53,19 +54,32 @@ public class ChapterDetail extends AppCompatActivity {
             @Override
             protected void populateViewHolder(ChapterViewHolder viewHolder, final Chapter model, int position) {
 
-                viewHolder.txt_name.setText(model.getNameChapter());
-                viewHolder.txt_no.setText(String.valueOf(model.getNoChapter()));
+                if (model.getVaccess().equals("Yes")) {
+                    viewHolder.txt_name.setText(model.getNameChapter());
+                    viewHolder.txt_no.setText(String.valueOf(model.getNoChapter()));
 
-                //Fixed crash when click to item
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        Intent startGame = new Intent(ChapterDetail.this, Start.class);
-                        Common.chapterId = adapter.getRef(position).getKey();
-                        Common.chapterName = model.getNameChapter();
-                        startActivity(startGame);
-                    }
-                });
+                    //Fixed crash when click to item
+                    viewHolder.setItemClickListener(new ItemClickListener() {
+                        @Override
+                        public void onClick(View view, int position, boolean isLongClick) {
+                            Intent startGame = new Intent(ChapterDetail.this, Start.class);
+                            Common.chapterId = adapter.getRef(position).getKey();
+                            Common.chapterName = model.getNameChapter();
+                            startActivity(startGame);
+                        }
+                    });
+                } else if (model.getVaccess().equals("No")) {
+                    viewHolder.txt_name.setText(model.getNameChapter());
+                    viewHolder.txt_no.setText(String.valueOf(model.getNoChapter()));
+
+                    //Fixed crash when click to item
+                    viewHolder.setItemClickListener(new ItemClickListener() {
+                        @Override
+                        public void onClick(View view, int position, boolean isLongClick) {
+                            Toast.makeText(ChapterDetail.this, "Please get Permission from your Lecturer!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         };
 

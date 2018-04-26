@@ -1,17 +1,18 @@
 package com.sptas.sptasv2.Model;
 
 public class Chapter {
-    String id, categoryId, chapterId, nameChapter, noChapter;
+    String id, categoryId, chapterId, nameChapter, noChapter, vaccess;
 
     public Chapter() {
     }
 
-    public Chapter(String id, String categoryId, String chapterId, String nameChapter, String noChapter) {
+    public Chapter(String id, String categoryId, String chapterId, String nameChapter, String noChapter, String vaccess) {
         this.id = id;
         this.categoryId = categoryId;
         this.chapterId = chapterId;
         this.nameChapter = nameChapter;
         this.noChapter = noChapter;
+        this.vaccess = vaccess;
     }
 
     public String getId() {
@@ -52,5 +53,13 @@ public class Chapter {
 
     public void setNoChapter(String noChapter) {
         this.noChapter = noChapter;
+    }
+
+    public String getVaccess() {
+        return vaccess;
+    }
+
+    public void setVaccess(String vaccess) {
+        this.vaccess = vaccess;
     }
 }
