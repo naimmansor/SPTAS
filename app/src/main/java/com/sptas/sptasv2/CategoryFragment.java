@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sptas.sptasv2.Common.Common;
 import com.sptas.sptasv2.Interface.ItemClickListener;
-import com.sptas.sptasv2.Lecturer.QuestionBank;
+import com.sptas.sptasv2.Lecturer.ChapterBank;
 import com.sptas.sptasv2.Model.Category;
 import com.sptas.sptasv2.Student.ChapterDetail;
 import com.sptas.sptasv2.Student.Start;
@@ -85,9 +85,10 @@ public class CategoryFragment extends Fragment {
                         //Toast.makeText(getActivity(), String.format("%d|%s", adapter.getRef(position).getKey(), model.getName()), Toast.LENGTH_SHORT).show();
 
                         if (Common.currentUser.getUserType().equals("Lecturer")) {
-                            Intent startChapter = new Intent(getActivity(), QuestionBank.class);
+                            Intent startChapter = new Intent(getActivity(), ChapterBank.class);
                             startActivity(startChapter);
                         } else if (Common.currentUser.getUserType().equals("Student")) {
+
                             if (model.getName().equals("Data Structure")) {
                                 Intent startChapter = new Intent(getActivity(), ChapterDetail.class);
                                 Common.categoryId = adapter.getRef(position).getKey();

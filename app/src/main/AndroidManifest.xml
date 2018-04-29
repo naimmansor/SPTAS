@@ -39,7 +39,11 @@
 
         <activity android:name=".Lecturer.QuestionBank" />
         <activity android:name=".Lecturer.StatisticFragment" />
-        <activity android:name=".Student.ChapterDetail"></activity>
+        <activity android:name=".Student.ChapterDetail" />
+        <activity
+            android:name=".Lecturer.ChapterBank"
+            android:label="@string/title_activity_chapter_bank"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

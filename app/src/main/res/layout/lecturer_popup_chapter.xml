@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_chapter"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chapter Details :"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RadioGroup
+        android:id="@+id/edtCategoryId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/edtCategoryIdDS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Data Structure" />
+
+        <RadioButton
+            android:id="@+id/edtCategoryIdSE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Software Engineering" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edtChapterId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chapter ID">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtChapterName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chapter Name">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtChapterNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chapter No">
+
+        <requestFocus />
+    </EditText>
+
+    <RadioGroup
+        android:id="@+id/edtAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/edtAccessYes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yes" />
+
+        <RadioButton
+            android:id="@+id/edtAccessNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="No" />
+
+    </RadioGroup>
+
+</LinearLayout>
