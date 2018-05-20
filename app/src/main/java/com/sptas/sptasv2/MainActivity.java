@@ -25,7 +25,7 @@ import com.sptas.sptasv2.Model.User;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    MaterialEditText edtNewUserType, edtNewUser, edtNewPassword, edtNewEmail, edtNewNoPhone, edtNewYear, edtNewNickName; //for Sign Up
+    MaterialEditText edtNewUserType, edtNewUser, edtNewPassword, edtNewEmail, edtNewNickName; //for Sign Up
     MaterialEditText edtUser, edtPassword; //for Sign In
 
     Button btnSignUp, btnSignIn;
@@ -125,8 +125,6 @@ public class MainActivity extends AppCompatActivity {
         edtNewUser = sign_up_layout.findViewById(R.id.edtNewUserName);
         edtNewPassword = sign_up_layout.findViewById(R.id.edtNewPassword);
         edtNewEmail = sign_up_layout.findViewById(R.id.edtNewEmail);
-        edtNewNoPhone = sign_up_layout.findViewById(R.id.edtNewNoPhone);
-        edtNewYear = sign_up_layout.findViewById(R.id.edtNewYear);
         edtNewNickName = sign_up_layout.findViewById(R.id.edtNewNickName);
 
         alertDialog.setView(sign_up_layout);
@@ -146,8 +144,6 @@ public class MainActivity extends AppCompatActivity {
                         edtNewUser.getText().toString(),
                         edtNewPassword.getText().toString(),
                         edtNewEmail.getText().toString(),
-                        edtNewNoPhone.getText().toString(),
-                        edtNewYear.getText().toString(),
                         edtNewNickName.getText().toString());
 
                 users.addListenerForSingleValueEvent(new ValueEventListener() {

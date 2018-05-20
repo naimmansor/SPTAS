@@ -51,15 +51,11 @@ public class StudentFragment extends Fragment {
         txt_score = myFragment.findViewById(R.id.txt_score);
         txt_name = myFragment.findViewById(R.id.txt_name);
         txt_email = myFragment.findViewById(R.id.txt_email);
-        txt_phone = myFragment.findViewById(R.id.txt_phone);
-        txt_class = myFragment.findViewById(R.id.txt_class);
         txt_nickName = myFragment.findViewById(R.id.txt_nickName);
 
 
         txt_name.setText(Common.currentUser.getUserName().toUpperCase());
         txt_email.setText(Common.currentUser.getEmail());
-        txt_phone.setText(Common.currentUser.getNoPhone());
-        txt_class.setText(Common.currentUser.getYear());
         txt_nickName.setText(Common.currentUser.getnickName());
 
     }

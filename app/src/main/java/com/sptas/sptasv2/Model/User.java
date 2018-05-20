@@ -9,21 +9,17 @@ public class User {
     private String userName;
     private String password;
     private String email;
-    private String noPhone;
-    private String year;
     private String nickName;
 
 
     public User() {
     }
 
-    public User(String userType, String userName, String password, String email, String noPhone, String year, String nickName) {
+    public User(String userType, String userName, String password, String email, String nickName) {
         this.userType = userType;
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.noPhone = noPhone;
-        this.year = year;
         this.nickName = nickName;
     }
 
@@ -57,22 +53,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getNoPhone() {
-        return noPhone;
-    }
-
-    public void setNoPhone(String noPhone) {
-        this.noPhone = noPhone;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
     }
 
     public String getnickName() {

@@ -123,8 +123,6 @@ public class ChapterList extends ArrayAdapter<Chapter> {
 
                 userId = chapter.getId();
 
-                userId = chapter.getId();
-
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
@@ -155,8 +153,8 @@ public class ChapterList extends ArrayAdapter<Chapter> {
                                         //update
                                         databaseReference.child(userId).child("categoryId").setValue(cid);
                                         databaseReference.child(userId).child("chapterId").setValue(chapterID);
-                                        databaseReference.child(userId).child("chapterName").setValue(chapter);
-                                        databaseReference.child(userId).child("chapterNo").setValue(no);
+                                        databaseReference.child(userId).child("nameChapter").setValue(chapter);
+                                        databaseReference.child(userId).child("noChapter").setValue(no);
                                         databaseReference.child(userId).child("vaccess").setValue(access);
 
                                         Toast.makeText(context, "Question Updated Successfully!", Toast.LENGTH_SHORT).show();
